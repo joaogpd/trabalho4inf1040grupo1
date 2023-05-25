@@ -1,13 +1,25 @@
-__all__ = ["teste_atualizacao_preco_e_nome"]
+__all__ = ["teste_atualizacao_preco_e_nome", "teste_remove_jogo", "teste_restaura_persiste"]
 
 
-# mocking, deve ser chamada de outro módulo
+#### mocking, deve ser chamada de outro módulo ####
+
 def alterar_nome(estrutura, nome_atual, nome_novo):
   return
 
-# mocking, deve ser chamada de outro módulo
 def alterar_preco(estrutura, nome, preco_novo):
   return
+
+def restaura_estrutura(json):
+    return
+
+def persiste_estrutura(estrutura):
+    return
+
+def remove_jogo(nome, estrutura):
+    return
+
+#### mocking, deve ser chamada de outro módulo ####
+
 
 def teste_atualizacao_preco_e_nome():
   dados = dict()
@@ -53,10 +65,6 @@ def teste_atualizacao_preco_e_nome():
     print("Não passou no caso 2")
 
 
-#mocking
-def remove_jogo():
-    return
-
 def teste_remove_jogo():
     print("remove_jogo")
     #estrutura ficticia
@@ -92,4 +100,46 @@ def teste_remove_jogo():
 
     return 0
 
+
+def teste_restaura_persiste():
+    print("restaura_persiste")
+
+    #tad correto (dict)
+    estrutura_valida = {"nome1": 10,
+                        "nome2" : 20,
+                        "nome3" : 30}
+    
+    #tad incorreto
+    estrutura_invalida = [1,2,3]
+
+    #nome de arquivo
+    nome_valido = "dados_estrutura.json"
+    nome_invalido = "blabla.js"
+
+    persiste_estrutura(estrutura_valida)
+    estrutura_retornada = restaura_estrutura(nome_valido)
+
+    if estrutura_retornada == estrutura_valida:
+        print("Passou no caso 1 (estrutura_valida, nome_valido)")
+    else:
+        print("Não passou no caso 1 (estrutura_valida, nome_valido)")
+        return 1
+    
+    try: 
+        restaura_estrutura(nome_invalido)
+    except Exception as e:
+        print(f"Não passou no caso 2 (nome_invalido) {type(e).__name__}")
+        return 1
+    else:
+        print("Passou no caso 2 (nome_invalido)")
+
+    try: 
+        persiste_estrutura(estrutura_invalida)
+    except Exception as e:
+        print(f"Não passou no caso 3 (estrutura_invalida) {type(e).__name__}")
+        return 1
+    else:
+        print("Passou no caso 3 (estrutura_invalida)")
+    
+    return 0
 
