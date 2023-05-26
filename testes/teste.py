@@ -18,6 +18,9 @@ def persiste_estrutura(estrutura):
 def remove_jogo(nome, estrutura):
     return
 
+def exibe_todos(estrutura):
+    return
+
 #### mocking, deve ser chamada de outro módulo ####
 
 
@@ -143,3 +146,32 @@ def teste_restaura_persiste():
     
     return 0
 
+
+def teste_exibe_todos():
+    print("exibe_todos")
+
+    #TAD correto
+    estrutura_valida="preenchida"
+    
+    #TAD incorreto
+    estrutura_invalida="vazia"
+
+    #testando exibição com estrutura invalida
+    resultado=exibe_todos(estrutura_invalida)
+    
+    if resultado == -1:
+        print("Passou no caso 1 (estrutura vazia)")
+        return 1
+    else:
+        print("Não passou no caso 1 (estrutura vazia)")
+
+    #testando exibição com estrutura não vazia
+    resultado=exibe_todos(estrutura_valida)
+
+    if resultado == 0:
+        print("Passou no caso 2 (estrutura não vazia)")
+    else:
+        print("Não passou no caso 2 (estrutura não vazia)")
+        return 1
+    
+    return 0
