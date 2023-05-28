@@ -1,13 +1,8 @@
+from catalogo/catalogo.py import *
+
 __all__ = ["teste_atualizacao_preco_e_nome", "teste_remove_jogo", "teste_restaura_persiste"]
 
-
 #### mocking, deve ser chamada de outro módulo ####
-
-def alterar_nome(estrutura, nome_atual, nome_novo):
-  return
-
-def alterar_preco(estrutura, nome, preco_novo):
-  return
 
 def restaura_estrutura(json):
     return
