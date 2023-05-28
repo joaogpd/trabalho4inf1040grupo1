@@ -1,3 +1,5 @@
+__all__ = ["alterar_nome", "alterar_preco"]
+
 def alterar_nome(estrutura, nome, nome_novo):
   if nome not in estrutura.keys():
     return -1
