@@ -21,6 +21,9 @@ def remove_jogo(nome, estrutura):
 def exibe_todos(estrutura):
     return
 
+def exibe_jogo(nome,estrutura):
+    return
+
 #### mocking, deve ser chamada de outro módulo ####
 
 
@@ -174,4 +177,64 @@ def teste_exibe_todos():
         print("Não passou no caso 2 (estrutura não vazia)")
         return 1
     
+    return 0
+
+def teste_exibe_jogo():
+    print("exibe_jogo")
+    #TAD correto
+    estrutura_valida=dict()   
+    #TAD incorreto
+    estrutura_invalida="vazia"
+    #nome valido
+    nome_valido="nome do jogo"
+    #nome invalido
+    nome_invalido="nome da loja"
+    #nome de jogo removido
+    nome_removido="jogo removido"
+    #nome de jogo inexistente
+    nome_inexistente="jogo inexistente"
+
+    #testando exibição com nome invalido
+    resultado=exibe_jogo(nome_invalido,estrutura_valida)
+    if resultado == -2:
+        print("Passou no caso 1 (nome invalido)")
+    else:
+        print("Não passou no caso 1 (nome invalido)")
+        return 1
+    
+    #testando exibição com estrutura vazia
+    resultado=exibe_jogo(nome_valido,estrutura_invalida)
+
+    if resultado == -1:
+        print("Passou no caso 2 (estrutura vazia)")   
+    else:
+        print("Não passou no caso 2 (estrutura vazia)")
+        return 1
+    
+    #testando exibição com jogo presente
+    resultado=exibe_jogo(nome_valido,estrutura_valida)
+    
+    if resultado==0:
+        print("Passou no caso 3 (jogo presente)")  
+    else:
+        print("Não passou no caso 3 (jogo presente)") 
+        return 1
+
+    #testando exibição com jogo não presente
+    resultado=exibe_jogo(nome_removido,estrutura_valida)
+    
+    if resultado==1:
+        print("Passou no caso 4 (jogo anteriormente removido)")  
+    else:
+        print("Não passou no caso 4 (jogo anteriormente removido)") 
+        return 1
+
+    #testando exibição com jogo nunca existente
+    resultado=exibe_jogo(nome_inexistente,estrutura_valida)
+    
+    if resultado==2:
+        print("Passou no caso 4 (jogo nunca existente)")  
+    else:
+        print("Não passou no caso 4 (jogo nunca existente)") 
+        return 1
     return 0
