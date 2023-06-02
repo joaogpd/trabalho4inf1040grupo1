@@ -25,6 +25,9 @@ def exibe_todos(estrutura):
 def exibe_jogo(nome,estrutura):
     return
 
+def gera_log(mensagem):
+    return
+
 #### mocking, deve ser chamada de outro módulo ####
 
 
@@ -334,5 +337,21 @@ def teste_exibe_jogo():
         print("Passou no caso 4 (jogo nunca existente)")  
     else:
         print("Não passou no caso 4 (jogo nunca existente)") 
+        return 1
+    return 0
+
+def teste_gera_log():
+    print("gera_log")
+
+    #mensagem correta
+    mensagem_valida="mensagem valida"
+
+    #testando geração com mensagem adequada
+    resultado=gera_log(mensagem_valida)
+
+    if resultado==0:
+        print("Passou no caso 1 (mensagem adequada)")
+    else:
+        print("Não passou no caso 1 (mensagem adequada)")
         return 1
     return 0
