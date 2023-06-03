@@ -16,5 +16,8 @@ def alterar_preco(estrutura, nome, preco_novo):
     return 0
 
 def exibe_todos_catalogo(estrutura):
+  if not estrutura:
+    return -1 
   for i in estrutura.keys():
     print("Nome: {} Preço: {}".format(i, estrutura[i]))
+    return 0
