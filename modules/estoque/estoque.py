@@ -14,3 +14,14 @@ def exibe_todos_estoque(estrutura):
   for i in estrutura.keys():
     print("Nome: {}".format(i))
     return 0
+
+def exibe_jogo(nome, estrutura):
+    if not isinstance(nome,str):
+        return -2 #Nome inválido
+    if estrutura==0:
+        print("Estrutura vazia")
+        return -1 #Estrutura vazia
+    if nome in estrutura:
+        print("Nome: {}\nPreco: {}",format(nome,estrutura[nome]))
+        return 0 #Jogo existente
+    
