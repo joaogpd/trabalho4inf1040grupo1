@@ -1,5 +1,16 @@
 __all__ = ["alterar_nome", "alterar_preco", "exibe_todos_catalogo"]
-
+"""
+Objetivo: trocar o nome de um jogo do catálogo por um novo
+Descrição detalhada:
+- requisitos da função (pequeno escopo de efeito)
+Acoplamento
+- explicação dos parâmetros
+- explicação dos retornos possíveis
+Condições de acoplamento:
+- assertivas de entrada
+- assertivas de saída
+Interface com o usuário:
+"""
 def alterar_nome(estrutura, nome, nome_novo):
   if nome not in estrutura.keys():
     return -1
