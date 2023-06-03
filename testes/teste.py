@@ -255,10 +255,10 @@ def teste_exibe_todos():
     print("exibe_todos")
 
     #TAD correto
-    estrutura_valida="preenchida"
+    estrutura_valida={"nome1":10,"nome2":20,"nome3":30}
     
     #TAD incorreto
-    estrutura_invalida="vazia"
+    estrutura_invalida={}
 
     #testando exibição com estrutura invalida
     resultado=exibe_todos(estrutura_invalida)
@@ -283,17 +283,17 @@ def teste_exibe_todos():
 def teste_exibe_jogo():
     print("exibe_jogo")
     #TAD correto
-    estrutura_valida=dict()   
+    estrutura_valida={"nome1":10,"nome2":20,"nome3":30}
     #TAD incorreto
-    estrutura_invalida="vazia"
+    estrutura_invalida={}
     #nome valido
-    nome_valido="nome do jogo"
+    nome_valido="Detetive"
     #nome invalido
-    nome_invalido="nome da loja"
+    nome_invalido=3
     #nome de jogo removido
-    nome_removido="jogo removido"
+    nome_removido="Jogo da Vida"
     #nome de jogo inexistente
-    nome_inexistente="jogo inexistente"
+    nome_inexistente="WAR"
 
     #testando exibição com nome invalido
     resultado=exibe_jogo(nome_invalido,estrutura_valida)
@@ -322,7 +322,7 @@ def teste_exibe_jogo():
         return 1
 
     #testando exibição com jogo não presente
-    resultado=exibe_jogo(nome_removido,estrutura_valida)
+    resultado=remove_jogo(nome_removido,estrutura_valida)
     
     if resultado==1:
         print("Passou no caso 4 (jogo anteriormente removido)")  
@@ -331,9 +331,9 @@ def teste_exibe_jogo():
         return 1
 
     #testando exibição com jogo nunca existente
-    resultado=exibe_jogo(nome_inexistente,estrutura_valida)
+    resultado=remove_jogo(nome_inexistente,estrutura_valida)
     
-    if resultado==2:
+    if resultado==1:
         print("Passou no caso 4 (jogo nunca existente)")  
     else:
         print("Não passou no caso 4 (jogo nunca existente)") 
