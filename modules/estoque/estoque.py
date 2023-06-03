@@ -9,5 +9,8 @@ def remove_jogo(nome, estrutura):
     return 0 #Jogo nao encontrado (já removido)
 
 def exibe_todos_estoque(estrutura):
+  if not estrutura:
+    return -1 # Estrutura vazia. Dicionario vazio "valued" como "false"
   for i in estrutura.keys():
     print("Nome: {}".format(i))
+    return 1
