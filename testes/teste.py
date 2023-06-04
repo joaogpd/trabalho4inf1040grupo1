@@ -1,4 +1,5 @@
-from catalogo/catalogo.py import *
+# from ../modules/catalogo/catalogo.py import *
+# TODO: conferir como realizar a importação de forma adequada das funções dos módulos 
 
 __all__ = ["teste_atualizacao_preco_e_nome", "teste_remove_jogo", "teste_restaura_persiste"]
 
