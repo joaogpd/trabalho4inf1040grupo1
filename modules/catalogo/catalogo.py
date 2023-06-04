@@ -102,4 +102,4 @@ def exibe_todos_catalogo(estrutura):
     return -1 
   for i in estrutura.keys():
     print("Nome: {} Preço: {}".format(i, estrutura[i]))
-    return 0
+  return 0
