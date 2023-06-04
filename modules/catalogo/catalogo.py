@@ -21,7 +21,7 @@ __all__ = ["alterar_nome", "alterar_preco", "exibe_todos_catalogo"]
 ** Condições de acoplamento:
 * Assertivas de entrada:
 - A função deve receber três parâmetros
-** Assertivas de saída:
+* Assertivas de saída:
 - O nome antigo ('nome') deve ter sido removido da estrutura
 - O nome novo ('nome_novo') deve estar presente com o conteúdo do antigo
 """
@@ -59,7 +59,7 @@ def alterar_nome(estrutura, nome, nome_novo):
 ** Condições de acoplamento:
 * Assertivas de entrada:
 - A função deve receber três parâmetros
-** Assertivas de saída:
+* Assertivas de saída:
 - O nome ('nome') deve ter conteúdo igual ao preço novo passado na função ('preco_novo')
 """
 def alterar_preco(estrutura, nome, preco_novo):
@@ -89,11 +89,10 @@ def alterar_preco(estrutura, nome, preco_novo):
 - msgerro2: caso de 'estrutura' estar vazia
 - msgsucesso: caso de sucesso
 ** Condições de acoplamento:
- Assertivas de entrada:
-
-** Assertivas de saída:
-
-** Interface com o usuário:
+* Assertivas de entrada:
+- A função recebe um parâmetro
+* Assertivas de saída:
+- Todos os conteúdos da estrutura foram impressos
 """
 def exibe_todos_catalogo(estrutura):
   if not isinstance(estrutura, dict):
