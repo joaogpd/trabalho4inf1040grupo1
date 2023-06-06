@@ -102,3 +102,23 @@ def exibe_todos_catalogo(estrutura):
   for i in estrutura.keys():
     print("Nome: {} Preço: {}".format(i, estrutura[i]))
   return 0
+
+def cadastrar(estrutura, nome, preco):
+    
+    #Tratando casos de parametros invalidos
+    
+    if not isinstance(estrutura, dict):
+        print("Erro, a estrutura passada não é dict")
+        return -4
+    if not (isinstance(preco, int) or isinstance(preco,float)):
+        print("Erro, o preco passado não é inteiro nem float")
+        return -5
+    if not isinstance(nome, str):
+        print("Erro, o nome não é uma string")
+        return -5
+    
+    #tratando casos de parametros invalidos
+    
+
+    estrutura[nome] = preco
+    return estrutura
