@@ -19,7 +19,7 @@
 ** Condições de acoplamento:
 * Assertivas de entrada:
 - A função recebe 3 parâmetros
-- Precisa das funcoe auxiliares, verificar_json, insere_jogo e diminuir_quantidade
+- Precisa das funcoe auxiliares, verificar_json, aumentar_quantidade e diminuir_quantidade
 * Assertivas de saída:
 - Realiza as operacoes (compra/venda) necessaria e retorna o codigo correspondente
 - Arquivo de solicitacao JSON será descartado, entao nao é preciso fazer nada com ele
@@ -76,7 +76,7 @@ def tratar_solicitacao_compra(solicitacao, estoque, preco):
                 print(f"O jogo {nome_jogo} esta em falta")
 
                 # Repoe o estoque
-                insere_jogo(estoque, nome_jogo, 10)  # Compra 10 unidades
+                aumentar_quantidade(estoque, nome_jogo)  # Compra 10 unidades
                 print(f"Um pedido de compra do jogo {nome_jogo} foi realizado")
                 erro_quantidade+=1
 
@@ -87,7 +87,7 @@ def tratar_solicitacao_compra(solicitacao, estoque, preco):
 
                 # Repoe o estoque
                 diminuir_quantidade(estoque, nome_jogo, quantidade_disponivel) # Remove/Vende todas unidades restantes
-                insere_jogo(estoque, nome_jogo, 10)  # Compra 10 unidades
+                aumentar_quantidade(estoque, nome_jogo)  # Compra 10 unidades
                 print(f"Foram compradas apenas {quantidade_disponivel} unidades do jogo {nome_jogo}, e um pedido de reposicao do estoque foi realizado")
                 erro_quantidade+=1
 
@@ -97,7 +97,7 @@ def tratar_solicitacao_compra(solicitacao, estoque, preco):
                 print(f"Quantidade restante: {quantidade_disponivel - quantidade_solicitada}")
 
                 # Repoe o estoque
-                insere_jogo(estoque, nome_jogo, 10)  # Compra 10 unidades
+                aumentar_quantidade(estoque, nome_jogo)  # Compra 10 unidades
                 print(f"Um pedido de reposicao do estoque já foi realizado")
 
             else:
@@ -146,7 +146,7 @@ def tratar_solicitacao_compra(solicitacao, estoque, preco):
 - Verifica o formato e a integridade do arquivo recebido e retorna o codigo equivalente
 '''
 
-#import json
+import json
 def verificar_json(nome_arquivo):
     with open(nome_arquivo, 'r') as arquivo:
         try:
