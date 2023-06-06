@@ -46,6 +46,26 @@ def exibe_jogo(nome, estrutura):
         print("Nome: {}\nPreco: {}",format(nome,estrutura[nome]))
         return 0 #Jogo existente
 
+    
+"""
+** Objetivo: inserir unidades de um jogo no estoque
+** Descrição detalhada:
+- Valida o tipo do parâmetro recebido
+- Atualiza o dicionário estrutura com a quantiade correta
+** Acoplamento
+* Parâmetro:
+- estrutura -> dict: estrutura que deve ter conteúdo impresso em totalidade
+- nome -> string: nome do jogo que deve ter a quantidade atualizada
+* Retornos:
+- msgerro1: caso de 'estrutura' não ser dict
+- msgerro2: caso de 'quantidade' não ser int ou 'nome' não ser string
+- estrutura em caso de sucesso
+** Condições de acoplamento:
+* Assertivas de entrada:
+- A função recebe 3 parâmetros
+* Assertivas de saída:
+- O jogo de nome 'nome' deve estar na estrutura com o valor correto da quantidade
+"""
 def inserir_jogo(estrutura, nome, quantidade=10):
     
     #Tratando casos de parametros invalidos
@@ -65,6 +85,25 @@ def inserir_jogo(estrutura, nome, quantidade=10):
     estrutura[nome] = quantidade
     return estrutura
 
+"""
+** Objetivo: atualizar unidades de um jogo no estoque
+** Descrição detalhada:
+- Valida o tipo do parâmetro recebido
+- Atualiza o dicionário estrutura com a quantiade correta
+** Acoplamento
+* Parâmetro:
+- estrutura -> dict: estrutura que deve ter conteúdo impresso em totalidade
+- nome -> string: nome do jogo que deve ter a quantidade atualizada
+* Retornos:
+- msgerro1: caso de 'estrutura' não ser dict
+- msgerro2: caso de 'quantidade' não ser int ou 'nome' não ser string
+- estrutura em caso de sucesso
+** Condições de acoplamento:
+* Assertivas de entrada:
+- A função recebe 3 parâmetros
+* Assertivas de saída:
+- O jogo de nome 'nome' deve estar na estrutura com o valor correto da quantidade
+"""
 def diminuir_quantidade(estrutura, nome, quantidade):
     if not isinstance(estrutura, dict):
         print("Erro, a estrutura passada não é dict")
@@ -85,7 +124,28 @@ def diminuir_quantidade(estrutura, nome, quantidade):
         estrutura[nome] -= quantidade  
     
     return estrutura
-  
+
+
+"""
+** Objetivo: inserir unidades de um jogo no estoque
+** Descrição detalhada:
+- Valida o tipo do parâmetro recebido
+- Atualiza o dicionário estrutura com a quantiade correta
+** Acoplamento
+* Parâmetro:
+- estrutura -> dict: estrutura que deve ter conteúdo impresso em totalidade
+- nome -> string: nome do jogo que deve ter a quantidade atualizada
+* Retornos:
+- msgerro1: caso de 'estrutura' não ser dict
+- msgerro2: caso de 'quantidade' não ser int ou 'nome' não ser string
+- estrutura em caso de sucesso
+** Condições de acoplamento:
+* Assertivas de entrada:
+- A função recebe 3 parâmetros
+* Assertivas de saída:
+- O jogo de nome 'nome' deve estar na estrutura com o valor correto da quantidade
+"""
+def inserir_jog  
 def aumentar_quantidade(estrutura, nome, quantidade=10):
     if not isinstance(estrutura, dict):
         print("Erro, a estrutura passada não é dict")
