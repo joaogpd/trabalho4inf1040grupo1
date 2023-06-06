@@ -103,6 +103,24 @@ def exibe_todos_catalogo(estrutura):
     print("Nome: {} Preço: {}".format(i, estrutura[i]))
   return 0
 
+
+"""
+** Objetivo: cadastrar um novo jogo no catalogo
+** Descrição detalhada:
+- Valida o tipo do parâmetro recebido
+** Acoplamento
+* Parâmetro:
+- estrutura -> dict: estrutura que deve ter conteúdo impresso em totalidade
+* Retornos:
+- msgerro1: caso de 'estrutura' não ser dict
+- msgerro2: caso de 'preco' não ser int nem float ou 'nome' não ser string
+- estrutura em caso de sucesso
+** Condições de acoplamento:
+* Assertivas de entrada:
+- A função recebe 3 parâmetros
+* Assertivas de saída:
+- O jogo de nome 'nome' deve estar na estrutura com o valor preco
+"""
 def cadastrar(estrutura, nome, preco):
     
     #Tratando casos de parametros invalidos
