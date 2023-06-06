@@ -76,7 +76,7 @@ def tratar_solicitacao_compra(solicitacao, estoque, preco):
                 print(f"O jogo {nome_jogo} esta em falta")
 
                 # Repoe o estoque
-                insere_jogo(estoque, nome_jogo, 10)  # COMPRA O JOGO OU EMITE ALERTA PARA COMPRAR?
+                insere_jogo(estoque, nome_jogo, 10)  # Compra 10 unidades
                 print(f"Um pedido de compra do jogo {nome_jogo} foi realizado")
                 erro_quantidade+=1
 
