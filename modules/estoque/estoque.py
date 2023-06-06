@@ -45,4 +45,22 @@ def exibe_jogo(nome, estrutura):
     if nome in estrutura:
         print("Nome: {}\nPreco: {}",format(nome,estrutura[nome]))
         return 0 #Jogo existente
+
+def inserir_jogo(estrutura, nome, quantidade=10):
     
+    #Tratando casos de parametros invalidos
+    
+    if not isinstance(estrutura, dict):
+        print("Erro, a estrutura passada não é dict")
+        return -4
+    if not isinstance(quantidade, int):
+        print("Erro, a quantidade passada não é inteira")
+        return -5
+    if not isinstance(nome, str):
+        print("Erro, o nome não é uma string")
+        return -5
+    
+    #tratando casos de parametros invalidos
+
+    estrutura[nome] = quantidade
+    return estrutura
