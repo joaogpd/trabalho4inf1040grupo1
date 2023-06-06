@@ -64,3 +64,37 @@ def inserir_jogo(estrutura, nome, quantidade=10):
 
     estrutura[nome] = quantidade
     return estrutura
+
+def diminuir_quantidade(estrutura, nome, quantidade):
+    if not isinstance(estrutura, dict):
+        print("Erro, a estrutura passada não é dict")
+        return -4
+    if not isinstance(quantidade, int):
+        print("Erro, a quantidade passada não é inteiro")
+        return -5
+    if not isinstance(nome, str):
+        print("Erro, o nome não é uma string")
+        return -5   
+    
+    if estrutura[nome] <= quantidade:
+        if (estrutura[nome] < quantidade):
+            print(f"Nao ha unidades suficientes, iremos retirar apenas {estrutura[nome]} unidades")
+        print(f"Iremos repor em 10 unidades o jogo {nome} após o estoque ter zerado")
+        estrutura[nome] = 10
+    else:
+        estrutura[nome] -= quantidade  
+    
+    return estrutura
+  
+def aumentar_quantidade(estrutura, nome, quantidade=10):
+    if not isinstance(estrutura, dict):
+        print("Erro, a estrutura passada não é dict")
+        return -4
+    if not isinstance(quantidade, int):
+        print("Erro, a quantidade passada não é inteiro")
+        return -5
+    if not isinstance(nome, str):
+        print("Erro, o nome não é uma string")
+        return -5   
+    estrutura[nome] += quantidade
+    return estrutura
