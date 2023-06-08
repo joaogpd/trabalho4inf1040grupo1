@@ -63,7 +63,7 @@ def alterar_nome(estrutura, nome, nome_novo):
 - O nome ('nome') deve ter conteúdo igual ao preço novo passado na função ('preco_novo')
 """
 def alterar_preco(estrutura, nome, preco_novo):
-   if not isinstance(estrutura, dict):
+  if not isinstance(estrutura, dict):
     return -1
   if not isinstance(nome, str):
     return -2
