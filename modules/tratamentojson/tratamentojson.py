@@ -1,3 +1,7 @@
+import json
+
+__all__ = ["tratar_solicitacao_compra", "restaura_estrutura"]
+
 """
 ** Objetivo: Tratar a solicitacao (arquivo json) de compra de jogos
 ** Descrição detalhada:
@@ -78,7 +82,7 @@ def tratar_solicitacao_compra(solicitacao, estoque, preco):
                 # Repoe o estoque
                 aumentar_quantidade(estoque, nome_jogo)  # Compra 10 unidades
                 print(f"Um pedido de compra do jogo {nome_jogo} foi realizado")
-                erro_quantidade+=1
+                erro_quantidade += 1
 
             elif quantidade_disponivel < quantidade_solicitada:
                 print(f"O jogo {nome_jogo} possui quantidade insuficiente em estoque")
@@ -89,7 +93,7 @@ def tratar_solicitacao_compra(solicitacao, estoque, preco):
                 diminuir_quantidade(estoque, nome_jogo, quantidade_disponivel) # Remove/Vende todas unidades restantes
                 aumentar_quantidade(estoque, nome_jogo)  # Compra 10 unidades
                 print(f"Foram compradas apenas {quantidade_disponivel} unidades do jogo {nome_jogo}, e um pedido de reposicao do estoque foi realizado")
-                erro_quantidade+=1
+                erro_quantidade += 1
 
             elif quantidade_disponivel == quantidade_solicitada:
                 diminuir_quantidade(estoque, nome_jogo, quantidade_solicitada) # Remove/Vende todas unidades solicitadas
@@ -107,7 +111,7 @@ def tratar_solicitacao_compra(solicitacao, estoque, preco):
 
         else:
             print(f"O jogo {nome_jogo} não esta presente no estoque.")
-            erro_cadastro+=1
+            erro_cadastro += 1
 
     # Retorno    
     if erro_quantidade >= 1 and erro_cadastro >= 1:
@@ -126,8 +130,119 @@ def tratar_solicitacao_compra(solicitacao, estoque, preco):
         print("Todas as compras foram realizadas com sucesso")
         return 1 # Sucesso
 
+"""
+Estrutura do arquivo json utilizado:
+Em "estoque", "nome" : "quantidade"
+Em "catalogo", "nome" : "preco"
+{
+    "estoque" : {
+        "jogo_um" : 4,
+        "jogo_dois" : 1,
+        ...
+    },
+    "catalogo" : {
+        "jogo_um" : 7.2,
+        "jogo_dois" : 8.6,
+        ...
+    }
+"""
 
-'''
+
+"""
+** Objetivo: Restaurar a estrutura persistida em arquivo .json referente ao estoque
+** Descrição detalhada:
+- Valida o tipo do primeiro parâmetro
+- Valida o arquivo de nome passado por parâmetro
+- Inicializa um dicionário vazio
+- Abre o arquivo e carrega para uma estrutura de dicionário
+- Acessa o campo de estoque
+- Insere cada valor de estoque na estrutura de estoque
+- Retorna a estrutura
+** Acoplamento
+* Parâmetro:
+- arquivo_estrutura -> str: nome do arquivo que deve ser aberto
+* Retornos:
+- -1: arquivo_estrutura não é string
+- -2: json vazio
+- -3: arquivo com formato inválido
+** Condições de acoplamento:
+* Assertivas de entrada:
+- O programa inicializou e não tem nenhuma estrutura de estoque carregada em memória
+* Assertivas de saída:
+- A função retorna a estrutura restaurada do arquivo para a memória principal
+- A estrutura retornada é referente ao estoque
+* Interface com o usuário:
+- 
+"""
+def restaura_estrutura_estoque(arquivo_estrutura):
+    if not isistance(arquivo_estrutura, str):
+        return -1 # arquivo_estrutura não é string
+    if verificar_json(arquivo_estrutura) == 0:
+        # print("Arquivo da estrutura está vazio")
+        return -2
+    if verificar_json(arquivo_estrutura) == -1:
+        # print("Arquivo da estrutura tem formato invalido")
+        return -3 
+ 
+    estrutura_estoque = dict()
+    with open(arquivo_estrutura) as f:
+        json_arquivo = json.load(f)
+        
+        arquivo_est_estoque = json_arquivo["estoque"]
+    
+        for nome in arquivo_est_estoque.keys():
+            inserir_jogo(estrutura_estoque, nome, arquivo_est_estoque[nome])
+    
+    return estrutura_estoque
+
+"""
+** Objetivo: Restaurar a estrutura persistida em arquivo .json referente ao catalogo
+** Descrição detalhada:
+- Valida o tipo do primeiro parâmetro
+- Valida o arquivo de nome passado por parâmetro
+- Inicializa um dicionário vazio
+- Abre o arquivo e carrega para uma estrutura de dicionário
+- Acessa o campo de catalogo
+- Insere cada valor de catalogo na estrutura de catalogo
+- Retorna a estrutura
+** Acoplamento
+* Parâmetro:
+- arquivo_estrutura -> str: nome do arquivo que deve ser aberto
+* Retornos:
+- -1: arquivo_estrutura não é string
+- -2: json vazio
+- -3: arquivo com formato inválido
+** Condições de acoplamento:
+* Assertivas de entrada:
+- O programa inicializou e não tem nenhuma estrutura de catalogo carregada em memória
+* Assertivas de saída:
+- A função retorna a estrutura restaurada do arquivo para a memória principal
+- A estrutura retornada é referente ao catálogo
+* Interface com o usuário:
+- 
+"""
+def restaura_estrutura_catalogo(arquivo_estrutura):
+    if not isistance(arquivo_estrutura, str):
+        return -1 # arquivo_estrutura não é string
+    if verificar_json(arquivo_estrutura) == 0:
+        # print("Arquivo da estrutura está vazio")
+        return -2
+    if verificar_json(arquivo_estrutura) == -1:
+        # print("Arquivo da estrutura tem formato invalido")
+        return -3 
+    
+    with open(arquivo_estrutura) as f:
+        json_arquivo = json.load(f)
+
+        estrutura_catalogo = dict()
+        arquivo_est_catalogo = json_arquivo["catalogo"]
+                     
+        for nome in arquivo_est_catalogo.keys():
+            cadastrar(estrutura_catalogo, nome, arquivo_est_catalogo[nome])
+    
+    return estrutura_catalogo                 
+
+"""
 ** Objetivo: Verificar o arquivo json recebido
 ** Descrição detalhada:
 - Valida o arquivo recebido
@@ -144,9 +259,7 @@ def tratar_solicitacao_compra(solicitacao, estoque, preco):
 - A função recebe um arquivo
 * Assertivas de saída:
 - Verifica o formato e a integridade do arquivo recebido e retorna o codigo equivalente
-'''
-
-import json
+"""
 def verificar_json(nome_arquivo):
     with open(nome_arquivo, 'r') as arquivo:
         try:
