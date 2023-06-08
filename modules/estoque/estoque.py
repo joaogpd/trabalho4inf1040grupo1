@@ -2,11 +2,11 @@ __all__ = ["remove_jogo", "exibe_todos_estoque"]
 
 def remove_jogo(nome, estrutura):
     if not isinstance(nome, str):
-        return -1 #Nome invalido
+        return -1 # Nome invalido
     if nome in estrutura:
         del estrutura[nome]
-        return 1 #Jogo removido com sucesso
-    return 0 #Jogo nao encontrado (já removido)
+        return 1 # Jogo removido com sucesso
+    return 0 # Jogo nao encontrado (já removido)
 
 """
 ** Objetivo: exibir todos os itens da estrutura estoque
@@ -38,13 +38,13 @@ def exibe_todos_estoque(estrutura):
 
 def exibe_jogo(nome, estrutura):
     if not isinstance(nome,str):
-        return -2 #Nome inválido
+        return -2 # Nome inválido
     if estrutura==0:
         print("Estrutura vazia")
         return -1 #Estrutura vazia
     if nome in estrutura:
-        print("Nome: {}\nPreco: {}",format(nome,estrutura[nome]))
-        return 0 #Jogo existente
+        print("Nome: {}\nPreco: {}", format(nome, estrutura[nome]))
+        return 0 # Jogo existente
 
     
 """
@@ -80,7 +80,7 @@ def inserir_jogo(estrutura, nome, quantidade=10):
         print("Erro, o nome não é uma string")
         return -5
     
-    #tratando casos de parametros invalidos
+    # tratando casos de parametros invalidos
 
     estrutura[nome] = quantidade
     return estrutura
@@ -145,7 +145,6 @@ def diminuir_quantidade(estrutura, nome, quantidade):
 * Assertivas de saída:
 - O jogo de nome 'nome' deve estar na estrutura com o valor correto da quantidade
 """
-def inserir_jog  
 def aumentar_quantidade(estrutura, nome, quantidade=10):
     if not isinstance(estrutura, dict):
         print("Erro, a estrutura passada não é dict")
