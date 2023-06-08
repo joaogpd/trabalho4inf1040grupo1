@@ -10,9 +10,8 @@ __all__ = ["tratar_solicitacao_compra", "restaura_estrutura"]
 - Retorna o codigo equivalente ao resultado das movimentacoes
 ** Acoplamento
 * Parâmetro:
-- solicitacao -> json: 
+- solicitacao -> nome do arquivo json: 
 - estoque -> dict: estrutura que deve ter nome e quantidade de cada jogo
-- preco -> dict: estrutura que deve ter nome e preco de cada jogo
 * Retornos:
 -  1 # Sucesso
 - -2 # Arquivo vazio
@@ -22,8 +21,8 @@ __all__ = ["tratar_solicitacao_compra", "restaura_estrutura"]
 - -7 # 1+ jogos sem cadastro e/ou quantidade insuficiente
 ** Condições de acoplamento:
 * Assertivas de entrada:
-- A função recebe 3 parâmetros
-- Precisa das funcoe auxiliares, verificar_json, aumentar_quantidade e diminuir_quantidade
+- A função recebe 2 parâmetros
+- Precisa das funcoew auxiliares, verificar_json, aumentar_quantidade e diminuir_quantidade
 * Assertivas de saída:
 - Realiza as operacoes (compra/venda) necessaria e retorna o codigo correspondente
 - Arquivo de solicitacao JSON será descartado, entao nao é preciso fazer nada com ele
@@ -31,7 +30,6 @@ __all__ = ["tratar_solicitacao_compra", "restaura_estrutura"]
 
 # Solicitacao considerada:
 # solicitacao.json =
-# '''
 # {
 #   "jogos": [
 #         {"nome": "Jogo1", "quantidade": 2},
@@ -39,38 +37,35 @@ __all__ = ["tratar_solicitacao_compra", "restaura_estrutura"]
 #         {"nome": "Jogo3", "quantidade": 4}
 #     ]
 # }
-# '''
-# Estruturas consideradas:
+#
+# Estrutura considerada:
 # estoque = {
 #     "Jogo1": 3,
 #     "Jogo2": 0,
 #     "Jogo3": 2
 # }
-#
-# preco = {
-#     "Jogo1": 20.65,
-#     "Jogo2": 10.99,
-#     "Jogo3": 12.25
-# }
 
 
-
-def tratar_solicitacao_compra(solicitacao, estoque, preco):
+def tratar_solicitacao_compra(solicitacao, estoque):
 
     erro_quantidade = 0
     erro_cadastro = 0
 
     #Verifica o arquivo de solicitacao
-    if verificar_json(solicitacao) == 0:
+    if verificar_json(solicitacao) == -2:
         print("Arquivo de solicitacao .json está vazio")
         return -2 #Arquivo vazio
     
-    elif verificar_json(solicitacao) == -1:
-        print("Arquivo de solicitacao nao é um .json")
+    elif verificar_json(solicitacao) == -3:
+        print("Arquivo de solicitacao é invalido")
         return -3 #Arquivo invalido
-    
 
-    for jogo in solicitacao['jogos']:
+    # Carrega o .JSON
+    with open(solicitacao) as file:
+        dados = json.load(file)
+
+    print('--')
+    for jogo in dados['jogos']:
         nome_jogo = jogo['nome']
         quantidade_solicitada = jogo['quantidade']
 
@@ -81,8 +76,9 @@ def tratar_solicitacao_compra(solicitacao, estoque, preco):
 
                 # Repoe o estoque
                 aumentar_quantidade(estoque, nome_jogo)  # Compra 10 unidades
+                
                 print(f"Um pedido de compra do jogo {nome_jogo} foi realizado")
-                erro_quantidade += 1
+                erro_quantidade+=1
 
             elif quantidade_disponivel < quantidade_solicitada:
                 print(f"O jogo {nome_jogo} possui quantidade insuficiente em estoque")
@@ -92,26 +88,32 @@ def tratar_solicitacao_compra(solicitacao, estoque, preco):
                 # Repoe o estoque
                 diminuir_quantidade(estoque, nome_jogo, quantidade_disponivel) # Remove/Vende todas unidades restantes
                 aumentar_quantidade(estoque, nome_jogo)  # Compra 10 unidades
+              
                 print(f"Foram compradas apenas {quantidade_disponivel} unidades do jogo {nome_jogo}, e um pedido de reposicao do estoque foi realizado")
-                erro_quantidade += 1
+                erro_quantidade+=1
 
             elif quantidade_disponivel == quantidade_solicitada:
                 diminuir_quantidade(estoque, nome_jogo, quantidade_solicitada) # Remove/Vende todas unidades solicitadas
+                
                 print(f"O jogo {nome_jogo} foi comprado com sucesso")
                 print(f"Quantidade restante: {quantidade_disponivel - quantidade_solicitada}")
 
                 # Repoe o estoque
                 aumentar_quantidade(estoque, nome_jogo)  # Compra 10 unidades
+  
                 print(f"Um pedido de reposicao do estoque já foi realizado")
 
             else:
                 diminuir_quantidade(estoque, nome_jogo, quantidade_solicitada) # Remove/Vende todas unidades solicitadas
+
                 print(f"O jogo {nome_jogo} foi comprado com sucesso")
                 print(f"Quantidade restante: {quantidade_disponivel - quantidade_solicitada}")
 
         else:
             print(f"O jogo {nome_jogo} não esta presente no estoque.")
-            erro_cadastro += 1
+            erro_cadastro+=1
+        
+        print('--')
 
     # Retorno    
     if erro_quantidade >= 1 and erro_cadastro >= 1:
@@ -242,33 +244,24 @@ def restaura_estrutura_catalogo(arquivo_estrutura):
     
     return estrutura_catalogo                 
 
-"""
-** Objetivo: Verificar o arquivo json recebido
-** Descrição detalhada:
-- Valida o arquivo recebido
-- Retorna o codigo equivalente ao resultado encontrado
-** Acoplamento
-* Parâmetro:
-- nome_arquivo -> json: 
-* Retornos:
-- 1  # É um .JSON não vazio
-- 0  # JSON vazio
-- -1 # Não é um .JSON
-** Condições de acoplamento:
-* Assertivas de entrada:
-- A função recebe um arquivo
-* Assertivas de saída:
-- Verifica o formato e a integridade do arquivo recebido e retorna o codigo equivalente
-"""
-def verificar_json(nome_arquivo):
-    with open(nome_arquivo, 'r') as arquivo:
-        try:
-            conteudo = arquivo.read()
-            if not conteudo:
-                return 0  # JSON vazio
 
-            json.loads(conteudo)
-            return 1  # É um .JSON não vazio
-        
-        except (json.JSONDecodeError, UnicodeDecodeError):
-            return -1  # Não é um .JSON
+# Funcao auxiliar para verificar o arquivo .json a partir do nome (xxxxx.json)
+def verificar_json(nome_arquivo):
+    # Verifica a extensao do arquivo
+    if not nome_arquivo.endswith('.json'):
+        return -3  # Formato de arquivo invalido
+
+    try:
+        # Abre o arquivo
+        with open(nome_arquivo) as file:
+            data = json.load(file)
+            
+            # Checa se o arquivo esta vazio
+            if not data:
+                return -2  # JSON vazio
+
+            return 0  # JSON valido
+    except FileNotFoundError:
+        return -3  # Formato de arquivo invalido
+    except json.JSONDecodeError:
+        return -3  # Formato de arquivo invalido
