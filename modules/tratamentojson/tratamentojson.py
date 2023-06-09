@@ -1,6 +1,6 @@
 import json
 
-__all__ = ["tratar_solicitacao_compra", "restaura_estrutura"]
+__all__ = ["tratar_solicitacao_compra", "restaura_estrutura", "persiste_estrutura_estoque"]
 
 """
 ** Objetivo: Tratar a solicitacao (arquivo json) de compra de jogos
@@ -265,3 +265,60 @@ def verificar_json(nome_arquivo):
         return -3  # Formato de arquivo invalido
     except json.JSONDecodeError:
         return -3  # Formato de arquivo invalido
+    
+  
+"""
+Estrutura do dicionario esperado:
+"estoque" {"nome" : "quantidade"}
+"catalogo" {"nome" : "preco"}
+
+dados =
+{
+    "estoque" : {
+        "jogo_um" : 4,
+        "jogo_dois" : 1,
+        ...
+    },
+    "catalogo" : {
+        "jogo_um" : 7.2,
+        "jogo_dois" : 8.6,
+        ...
+    }
+
+
+** Objetivo: Persistir os dados e criar o arquivo .json
+** Descrição detalhada:
+- Valida o tipo e estrutura do parametro recebido (Espera um dicionario)
+- Abre o .json para (sobre)escrever as informacoes recebidas
+- Retorna o codigo de acordo com o resultado da operacao
+** Acoplamento
+* Parâmetro:
+- dados -> dict: Contem as informacoes dos produtos (quantidade em estoque e preco)
+* Retornos:
+- 1 #Sucesso
+- -3 #Parametro invalido
+- -4 #Estrutura do dict invalida
+** Condições de acoplamento:
+* Assertivas de entrada:
+- A função recebe 1 parâmetro
+- Recebe um dicionario contendo, na estrutura correta, as informacoes sobre preco e quantidade de cada produto
+* Assertivas de saída:
+- Sobrescreve o .json e retorna o codigo de erro
+- Nome do .json eh conhecido, logo nao deve ser retornado
+- 
+"""
+def persiste_estrutura_estoque(dados):
+    if not isinstance(dados, dict):
+        print("Arquivo invalido. O parametro recebido nao e um dict") #Arquivo recebido nao e um dict
+        return -3
+    
+    elif "estoque" not in dados or "catalogo" not in dados:
+        print("Estrutura invalida. O dicionario nao esta de acordo com o padrao") #Dicionario recebido nao possui a estrutura correta
+        return -4
+    
+    with open('estrutura.json', 'w') as arquivo:
+        json.dump(dados, arquivo, indent=4)
+    
+    print("Sucesso ao persistir os dados") #.json montado corretamente
+    return 1
+
