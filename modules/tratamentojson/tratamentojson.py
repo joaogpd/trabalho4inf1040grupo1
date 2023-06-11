@@ -1,6 +1,73 @@
 import json
 
-__all__ = ["tratar_solicitacao_compra", "restaura_estrutura", "persiste_estrutura_estoque"]
+__all__ = ["tratar_pedidos_novojogo","tratar_solicitacao_compra", "restaura_estrutura", "persiste_estrutura_estoque"]
+
+"""
+** Objetivo: Receber a solicitação de novos jogos
+** Descrição detalhada:
+- Valida o json recebido
+- Adiciona  o jogo em questão ao catálogo e ao estoque
+- 
+** Acoplamento
+* Parâmetro:
+- solicitacao -> nome do arquivo json:
+- estoque -> dict: estrutura que deve ter nome e quantidade de cada jogo
+- catalogo -> dict: estrutura que deve ter nome e valor de cada jogo
+* Retornos:
+-  0 # Sucesso
+- -1 # Jogo já pertencente ao catálogo
+- -2 # Arquivo vazio
+- -3 # Arquivo invalido
+** Condições de acoplamento:
+* Assertivas de entrada:
+- Se o arquivo json estiver preenchido, foi de maneira correta
+- funções auxiliares de verificar_json, cadastrar e aumentar_quantidade devem funcionar corretamente
+* Assertivas de saída:
+- Retorno de acordo com o resultado das operações internas
+"""     
+"""
+Estrutura do arquivo json utilizado:
+Em "estoque", "nome" : "quantidade"
+Em "catalogo", "nome" : "preco"
+{
+    "estoque" : {
+        "jogo_um" : 4,
+        "jogo_dois" : 1,
+        ...
+    },
+    "catalogo" : {
+        "jogo_um" : 7.2,
+        "jogo_dois" : 8.6,
+        ...
+    }
+"""
+def tratar_pedidos_novojogo(solicitacao,estoque,catalogo):
+    #Recebimento do pedido
+    if verificar_json(solicitacao) == -2:
+        print("Arquivo de solicitacao .json está vazio")
+        return -2 #Arquivo vazio
+    
+    elif verificar_json(solicitacao) == -3:
+        print("Arquivo de solicitacao é invalido")
+        return -3 #Arquivo invalido
+
+    #Tratamento do pedido
+    with open(solicitacao) as file:
+        dados = json.load(file)
+
+    for jogo in dados['jogos']:
+        nome_jogo = jogo['nome']
+        valor_jogo = jogo['valor']
+
+        if nome_jogo not in catalogo:
+            cadastrar(catalogo,nome_jogo,valor_jogo) # Adiciona no catalogo o jogo
+            
+
+            aumentar_quantidade(estoque, nome_jogo)  # Compra 10 unidades
+            return 0
+        else:
+            print("Jogo já existente no catálogo")#jogo já cadastrado
+            return -1
 
 """
 ** Objetivo: Tratar a solicitacao (arquivo json) de compra de jogos
