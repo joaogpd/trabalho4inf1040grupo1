@@ -1,4 +1,4 @@
-__all__ = ["remove_jogo", "exibe_todos_estoque"]
+__all__ = ["remove_jogo", "exibe_todos_estoque", "exibe_jogo", "inserir_jogo", "diminuir_quantidade", "aumentar_quantidade"]
 
 def remove_jogo(nome, estrutura):
     if not isinstance(nome, str):
