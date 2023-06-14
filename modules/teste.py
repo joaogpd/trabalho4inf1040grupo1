@@ -359,7 +359,15 @@ def teste_gera_log():
     return 0
 
 def main_teste():
-    teste
+    teste_atualizacao_preco_e_nome()
+    teste_remove_jogo()
+    teste_restaura_persiste()
+    teste_recebe_pedidos()
+    teste_insere_jogo()
+    teste_exibe_todos()
+    teste_exibe_jogo()
+    teste_gera_log()
+    print("TESTING DONE")
 
 
 if __name__ == '__main__':
