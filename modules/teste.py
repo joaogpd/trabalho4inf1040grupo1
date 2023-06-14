@@ -1,8 +1,8 @@
-from catalogo.catalogo import *
-# import ../modules/estoque/estoque.py
-# import ../modules/tratamentojson.py
+import catalogo.catalogo
+import estoque.estoque
+import tratamentojson.tratamentojson
 
-__all__ = ["teste_atualizacao_preco_e_nome", "teste_remove_jogo", "teste_restaura_persiste"]
+#  __all__ = ["teste_atualizacao_preco_e_nome", "teste_remove_jogo", "teste_restaura_persiste"]
 
 #### mocking, deve ser chamada de outro módulo ####
 
@@ -357,3 +357,10 @@ def teste_gera_log():
         print("Não passou no caso 1 (mensagem adequada)")
         return 1
     return 0
+
+def main_teste():
+    teste
+
+
+if __name__ == '__main__':
+    main_teste()
