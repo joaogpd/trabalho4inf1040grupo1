@@ -5,7 +5,7 @@ import tratamentojson.tratamentojson
 #  __all__ = ["teste_atualizacao_preco_e_nome", "teste_remove_jogo", "teste_restaura_persiste"]
 
 #### mocking, deve ser chamada de outro módulo ####
-
+""""
 def restaura_estrutura(json):
     return
 
@@ -29,7 +29,7 @@ def exibe_jogo(nome,estrutura):
 
 def gera_log(mensagem):
     return
-
+""""
 #### mocking, deve ser chamada de outro módulo ####
 
 
