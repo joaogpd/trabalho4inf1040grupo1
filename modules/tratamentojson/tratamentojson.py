@@ -1,6 +1,6 @@
 import json
 
-__all__ = ["tratar_pedidos_novojogo","tratar_solicitacao_compra", "restaura_estrutura", "persiste_estrutura_estoque"]
+__all__ = ["tratar_pedidos_novojogo", "tratar_solicitacao_compra", "restaura_estrutura_estoque", "restaura_estrutura_catalogo", "persiste_estrutura_estoque"]
 
 """
 ** Objetivo: Receber a solicitação de novos jogos
