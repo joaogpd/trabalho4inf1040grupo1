@@ -2,7 +2,7 @@ from modules.catalogo.catalogo import *
 from modules.estoque.estoque import *
 import json
 
-__all__ = ["tratar_pedidos_novojogo", "tratar_solicitacao_compra", "restaura_estrutura_estoque", "restaura_estrutura_catalogo", "persiste_estrutura_estoque_catalogo"]
+__all__ = ["tratar_pedidos_novojogo", "tratar_solicitacao_compra", "restaura_estrutura_estoque", "restaura_estrutura_catalogo", "persiste_estrutura"]
 
 """
 ** Objetivo: Receber a solicitação de novos jogos
@@ -377,7 +377,7 @@ dados =
 - Sobrescreve o .json e retorna o codigo de erro
 - Nome do .json eh conhecido, logo nao deve ser retornado
 """
-def persiste_estrutura_estoque_catalogo(estoque, catalogo):
+def persiste_estrutura(estoque, catalogo):
     if not isinstance(estoque, dict) or not isinstance(catalogo, dict):
         print("Parametro invalido. O parametro recebido nao e um dicionario") # Parametro recebido nao é um dicionario
         return -8
