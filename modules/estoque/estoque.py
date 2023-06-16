@@ -123,7 +123,7 @@ def diminuir_quantidade(estrutura, nome, quantidade):
     else:
         estrutura[nome] -= quantidade  
     
-    return estrutura
+    return 1
 
 
 """
@@ -156,5 +156,5 @@ def aumentar_quantidade(estrutura, nome, quantidade=10):
         print("Erro, o nome não é uma string")
         return -5   
     estrutura[nome] += quantidade
-    return estrutura
+    return 1
 
