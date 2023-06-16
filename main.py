@@ -3,6 +3,29 @@ import modules.estoque.estoque as estoque
 import modules.tratamentojson.tratamentojson as tjson
 
 def main():
+    dict_erros = {
+	    1: "Sucesso",
+	    0: "Jogo nao encontrado",
+	    -1: "Nome invalido",
+	    -2: "arquivo vazio",
+	    -3: "arquivo invalido",
+	    -4: "estrutura invalida",
+	    -5: "1+ quantidade insuficiente",
+	    -6: "1+ jogos sem cadastro",
+	    -7: "1+ jogos sem cadastro e/ou quantidade insuficiente",
+	    -8: "valor passado não é dict",
+	    -9: "dicionário vazio",
+	    -10: "valor de estrutura não é dict",
+	    -11: "valor de nome não é str",
+	    -12: "nome não presente na estrutura",
+	    -13: "valor de estrutura passada não é dict",
+	    -14: "valor de nome passado não é str",
+	    -15: "valor de preco_novo passado não é numeric",
+	    -16: "arquivo_estrutura não é string",
+	    -17: "json vazio",
+	    -18: "arquivo com formato inválido"
+    }
+	
     # est_estoque = tjson.restaura_estrutura_estoque()
     # est_catalogo = tjson.restaura_estrutura_catalogo()
     est_estoque = dict()
