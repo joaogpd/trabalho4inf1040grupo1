@@ -38,9 +38,8 @@ def main():
 	      "exibir_catalogo" : catalogo.exibe_todos_catalogo, "cadastrar_catalogo" : catalogo.cadastrar, "ler_pedidos_jogos_novos" : tjson.tratar_pedidos_novojogo, \
 	      "ler_pedidos_compras" : tjson.tratar_solicitacao_compra}
     while True:
-	tjson.persiste_estrutura(est_estoque, est_catalogo)
+		tjson.persiste_estrutura(est_estoque, est_catalogo)
         print("Escolha uma opção: ")
-        # inserir_catalogo inserir_estoque remover_estoque exibir_estoque exibir_catalogo 
         for i in opcoes.keys():
             print(i, end=" ")
         print("")
@@ -54,52 +53,52 @@ def main():
             func = opcoes[escolha]
             if "estoque" in escolha:
                 if "exibir" in escolha:
-		    if "jogo" in escolha:
-			nome = input("Nome: ")
-			ret = func(nome, est_estoque)
-			dict_log[escolha] = dict_erros[ret]
-		    else:
+		    		if "jogo" in escolha:
+						nome = input("Nome: ")
+						ret = func(nome, est_estoque)
+						dict_log[escolha] = dict_erros[ret]
+		    		else:
                         print("Estoque: ")
                         ret = func(est_estoque)
-			dict_log[escolha] = dict_erros[ret]
+						dict_log[escolha] = dict_erros[ret]
                 elif "inserir" in escolha:
                     nome = input("Nome: ")
                     # quantidade = input("Quantidade: ")
                     ret = func(est_estoque, nome)
-		    dict_log[escolha] = dict_erros[ret]
-	        elif "remover" in escolha:
-		    nome = input("Nome: ")
-		    ret = func(est_estoque, nome)
-		    dict_log[escolha] = dict_erros[ret]
-		elif "quantidade" in escolha:
-		    quantidade = input("Quantidade: ")
-		    nome = input("Nome: ")
-		    ret = func(est_estoque, nome, quantidade)
-		    dict_log[escolha] = dict_erros[ret]
+		    		dict_log[escolha] = dict_erros[ret]
+	        	elif "remover" in escolha:
+		    		nome = input("Nome: ")
+		    		ret = func(est_estoque, nome)
+		    		dict_log[escolha] = dict_erros[ret]
+				elif "quantidade" in escolha:
+		    		quantidade = input("Quantidade: ")
+		    		nome = input("Nome: ")
+		    		ret = func(est_estoque, nome, quantidade)
+		    		dict_log[escolha] = dict_erros[ret]
             elif "catalogo" in escolha:
-		if "alterar" in escolha:
-		    nome = input("Nome: ")
-		    if "nome" in escolha:
-			nome_novo = input("Nome novo: ")
-			ret = func(est_estoque, nome, nome_novo)
-			dict_log[escolha] = dict_erros[ret]
+				if "alterar" in escolha:
+		    		nome = input("Nome: ")
+		    		if "nome" in escolha:
+						nome_novo = input("Nome novo: ")
+						ret = func(est_estoque, nome, nome_novo)
+						dict_log[escolha] = dict_erros[ret]
              	    elif "preco" in escolha:
-			preco_novo = input("Preco novo: ")
-			ret = func(est_estoque, nome, preco_novo)
-			dict_log[escolha] = dict_erros[ret]
-		elif "exibir" in escolha:
-		        ret = func(est_catalogo)
-			dict_log[escolha] = dict_erros[ret]
-		elif "cadastrar" in escolha:
-			nome = input("Nome: ")
-			preco = input("Preco: ")
-  			ret = func(est_catalogo, nome, preco)
-			dict_log[escolha] = dict_erros[ret]
-	    elif "pedidos" in escolha:
-		if "jogos_novos" in "escolha":
-			# func()
-		elif "compras" in "escolha":
-			# func()
+						preco_novo = input("Preco novo: ")
+						ret = func(est_estoque, nome, preco_novo)
+						dict_log[escolha] = dict_erros[ret]
+				elif "exibir" in escolha:
+		        	ret = func(est_catalogo)
+					dict_log[escolha] = dict_erros[ret]
+				elif "cadastrar" in escolha:
+					nome = input("Nome: ")
+					preco = input("Preco: ")
+  					ret = func(est_catalogo, nome, preco)
+					dict_log[escolha] = dict_erros[ret]
+	    	elif "pedidos" in escolha:
+				if "jogos_novos" in "escolha":
+					# func()
+				elif "compras" in "escolha":
+					# func()
     gera_log(dict_log)
 
  
