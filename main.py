@@ -38,7 +38,7 @@ def main():
 	      "exibir_catalogo" : catalogo.exibe_todos_catalogo, "cadastrar_catalogo" : catalogo.cadastrar, "ler_pedidos_jogos_novos" : tjson.tratar_pedidos_novojogo, \
 	      "ler_pedidos_compras" : tjson.tratar_solicitacao_compra}
     while True:
-	tjson.persiste_estruturas(est_estoque, est_catalogo); 
+	tjson.persiste_estruturas(est_estoque, est_catalogo)
         print("Escolha uma opção: ")
         # inserir_catalogo inserir_estoque remover_estoque exibir_estoque exibir_catalogo 
         for i in opcoes.keys():
