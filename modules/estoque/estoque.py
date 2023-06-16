@@ -1,5 +1,13 @@
 __all__ = ["remove_jogo", "exibe_todos_estoque", "exibe_jogo", "inserir_jogo", "diminuir_quantidade", "aumentar_quantidade"]
 
+def validaArg(func):
+    def wrapper(*args, **kwargs):
+        if len(args) < 1:
+            print(f"Error, função {func.__name__} não recebeu argumentos")
+        return func(*args, **kwargs)
+    return wrapper
+
+@validaArg
 def remove_jogo(nome, estrutura):
     if not isinstance(nome, str):
         return -1 # Nome invalido
@@ -27,6 +35,7 @@ def remove_jogo(nome, estrutura):
 * Assertivas de saída:
 - Todos as chaves da estrutura foram impressas
 """
+@validaArg
 def exibe_todos_estoque(estrutura):
   if not isinstance(estrutura, dict):
     return -8
@@ -36,6 +45,7 @@ def exibe_todos_estoque(estrutura):
     print("Nome: {}".format(i))
   return 1
 
+@validaArg
 def exibe_jogo(nome, estrutura):
     if not isinstance(nome,str):
         return -2 # Nome inválido
@@ -66,6 +76,7 @@ def exibe_jogo(nome, estrutura):
 * Assertivas de saída:
 - O jogo de nome 'nome' deve estar na estrutura com o valor correto da quantidade
 """
+@validaArg
 def inserir_jogo(estrutura, nome, quantidade=10):
     
     #Tratando casos de parametros invalidos
@@ -104,6 +115,7 @@ def inserir_jogo(estrutura, nome, quantidade=10):
 * Assertivas de saída:
 - O jogo de nome 'nome' deve estar na estrutura com o valor correto da quantidade
 """
+@validaArg
 def diminuir_quantidade(estrutura, nome, quantidade):
     if not isinstance(estrutura, dict):
         print("Erro, a estrutura passada não é dict")
@@ -145,6 +157,7 @@ def diminuir_quantidade(estrutura, nome, quantidade):
 * Assertivas de saída:
 - O jogo de nome 'nome' deve estar na estrutura com o valor correto da quantidade
 """
+@validaArg
 def aumentar_quantidade(estrutura, nome, quantidade=10):
     if not isinstance(estrutura, dict):
         print("Erro, a estrutura passada não é dict")
