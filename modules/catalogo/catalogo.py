@@ -13,11 +13,11 @@ __all__ = ["alterar_nome", "alterar_preco", "exibe_todos_catalogo", "cadastrar"]
 - nome -> string: nome atual que deve ser alterado
 - nome_novo -> string: nome novo para o qual o antigo deve ser alterado 
 * Retornos:
-- msgerro2: caso de 'estrutura' não ser dict
-- msgerro3: caso de 'nome' não ser str
-- msgerro4: caso de 'nome_novo' não ser str
-- msgerro1: caso de 'nome' não presente na 'estrutura'
-- msgsucesso: caso de sucesso
+- -10: caso de 'estrutura' não ser dict
+- -11: caso de 'nome' não ser str
+- -11: caso de 'nome_novo' não ser str
+- -12: caso de 'nome' não presente na 'estrutura'
+- 1: caso de sucesso
 ** Condições de acoplamento:
 * Assertivas de entrada:
 - A função deve receber três parâmetros
@@ -27,17 +27,17 @@ __all__ = ["alterar_nome", "alterar_preco", "exibe_todos_catalogo", "cadastrar"]
 """
 def alterar_nome(estrutura, nome, nome_novo):
   if not isinstance(estrutura, dict):
-    return -1
+    return -10
   if not isinstance(nome, str):
-    return -2
+    return -11
   if not isinstance(nome_novo, str):
-    return -3
+    return -11
   if nome not in estrutura.keys():
-    return -1
+    return -12
   else:
     estrutura[nome_novo] = estrutura[nome]
     del estrutura[nome_novo]
-    return 0
+    return 1
   
 """
 ** Objetivo: alterar o preço de uma entrada na estrutura
@@ -64,16 +64,16 @@ def alterar_nome(estrutura, nome, nome_novo):
 """
 def alterar_preco(estrutura, nome, preco_novo):
   if not isinstance(estrutura, dict):
-    return -1
+    return -13
   if not isinstance(nome, str):
-    return -2
+    return -14
   if not (isinstance(preco_novo, int) or isinstance(preco_novo, float)):
-    return -3
+    return -15
   if nome not in estrutura.keys():
-    return -1
+    return -12
   else:
     estrutura[nome] = preco_novo
-    return 0
+    return 1
 
 """
 ** Objetivo: exibir todos os itens da estrutura catálogo
@@ -85,9 +85,9 @@ def alterar_preco(estrutura, nome, preco_novo):
 * Parâmetro:
 - estrutura -> dict: estrutura que deve ter conteúdo impresso em totalidade
 * Retornos:
-- msgerro1: caso de 'estrutura' não ser dict
-- msgerro2: caso de 'estrutura' estar vazia
-- msgsucesso: caso de sucesso
+- -8: caso de 'estrutura' não ser dict
+- -9: caso de 'estrutura' estar vazia
+- 1: caso de sucesso
 ** Condições de acoplamento:
 * Assertivas de entrada:
 - A função recebe um parâmetro
@@ -96,12 +96,12 @@ def alterar_preco(estrutura, nome, preco_novo):
 """
 def exibe_todos_catalogo(estrutura):
   if not isinstance(estrutura, dict):
-    return -2
+    return -8
   if not estrutura:
-    return -1 
+    return -9
   for i in estrutura.keys():
     print("Nome: {} Preço: {}".format(i, estrutura[i]))
-  return 0
+  return 1
 
 
 """
