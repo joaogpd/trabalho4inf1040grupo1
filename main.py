@@ -101,10 +101,7 @@ def main():
 			# func()
 		elif "compras" in "escolha":
 			# func()
-    f = open("Log.json", "w")
-    dict_log_json = json.dumps(dict_log)
-    f.write(dict_log_json)
-    f.close()
+    gera_log(dict_log)
 
  
 
