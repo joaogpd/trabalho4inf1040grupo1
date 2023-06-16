@@ -233,9 +233,9 @@ Em "catalogo", "nome" : "preco"
 * Parâmetro:
 - arquivo_estrutura -> str: nome do arquivo que deve ser aberto
 * Retornos:
-- -1: arquivo_estrutura não é string
-- -2: json vazio
-- -3: arquivo com formato inválido
+- -16: arquivo_estrutura não é string
+- -17: json vazio
+- -18: arquivo com formato inválido
 ** Condições de acoplamento:
 * Assertivas de entrada:
 - O programa inicializou e não tem nenhuma estrutura de estoque carregada em memória
@@ -247,13 +247,13 @@ Em "catalogo", "nome" : "preco"
 """
 def restaura_estrutura_estoque(arquivo_estrutura):
     if not isinstance(arquivo_estrutura, str):
-        return -1 # arquivo_estrutura não é string
+        return -16 # arquivo_estrutura não é string
     if verificar_json(arquivo_estrutura) == 0:
         # print("Arquivo da estrutura está vazio")
-        return -2
+        return -17
     if verificar_json(arquivo_estrutura) == -1:
         # print("Arquivo da estrutura tem formato invalido")
-        return -3 
+        return -18
  
     estrutura_estoque = dict()
     with open(arquivo_estrutura) as f:
@@ -280,9 +280,9 @@ def restaura_estrutura_estoque(arquivo_estrutura):
 * Parâmetro:
 - arquivo_estrutura -> str: nome do arquivo que deve ser aberto
 * Retornos:
-- -1: arquivo_estrutura não é string
-- -2: json vazio
-- -3: arquivo com formato inválido
+- -16: arquivo_estrutura não é string
+- -17: json vazio
+- -18: arquivo com formato inválido
 ** Condições de acoplamento:
 * Assertivas de entrada:
 - O programa inicializou e não tem nenhuma estrutura de catalogo carregada em memória
@@ -294,13 +294,13 @@ def restaura_estrutura_estoque(arquivo_estrutura):
 """
 def restaura_estrutura_catalogo(arquivo_estrutura):
     if not isinstance(arquivo_estrutura, str):
-        return -1 # arquivo_estrutura não é string
+        return -16 # arquivo_estrutura não é string
     if verificar_json(arquivo_estrutura) == 0:
         # print("Arquivo da estrutura está vazio")
-        return -2
+        return -17
     if verificar_json(arquivo_estrutura) == -1:
         # print("Arquivo da estrutura tem formato invalido")
-        return -3 
+        return -18
     
     with open(arquivo_estrutura) as f:
         json_arquivo = json.load(f)
