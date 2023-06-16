@@ -2,7 +2,7 @@ from modules.catalogo.catalogo import *
 from modules.estoque.estoque import *
 import json
 
-__all__ = ["tratar_pedidos_novojogo", "tratar_solicitacao_compra", "restaura_estrutura_estoque", "restaura_estrutura_catalogo", "persiste_estrutura_estoque"]
+__all__ = ["tratar_pedidos_novojogo", "tratar_solicitacao_compra", "restaura_estrutura_estoque", "restaura_estrutura_catalogo", "persiste_estrutura_estoque_catalogo"]
 
 """
 ** Objetivo: Receber a solicitação de novos jogos
@@ -337,10 +337,11 @@ def verificar_json(nome_arquivo):
     
   
 """
-Estrutura do dicionario esperado:
-"estoque" {"nome" : "quantidade"}
-"catalogo" {"nome" : "preco"}
+Estrutura dos dicionarios esperados:
+estoque = {"nome" : "quantidade"}
+catalogo = {"nome" : "preco"}
 
+Ex. da estutura do .json que sera montado:
 dados =
 {
     "estoque" : {
@@ -355,41 +356,41 @@ dados =
     }
 
 
-** Objetivo: Persistir os dados e criar o arquivo .json
+** Objetivo: Persistir os dados e cria o arquivo .json
 ** Descrição detalhada:
-- Valida o tipo e estrutura do parametro recebido (Espera um dicionario)
+- Valida o tipo e estrutura do parametro recebido (Espera dois dicionarios)
 - Abre o .json para (sobre)escrever as informacoes recebidas
 - Retorna o codigo de acordo com o resultado da operacao
 ** Acoplamento
 * Parâmetro:
-- dados -> dict: Contem as informacoes dos produtos (quantidade em estoque e preco)
+- estoque -> dict: Contem as informacoes dos produtos (nome e quantidade em estoque)
+- catalogo -> dict: Contem as informacoes dos produtos (nome e preco)
 * Retornos:
 - 1 #Sucesso
-- -3 #Parametro invalido
-- -4 #Estrutura do dict invalida
+- -8 # Parametro recebido nao é um dicionario
 ** Condições de acoplamento:
 * Assertivas de entrada:
-- A função recebe 1 parâmetro
-- Recebe um dicionario contendo, na estrutura correta, as informacoes sobre preco e quantidade de cada produto
+- A função recebe 2 parâmetros
+- Recebe um dicionario contendo, na estrutura correta, as informacoes sobre quantidade de cada produto.
+- Recebe um segundo dicionario contendo preco de cada produto
 * Assertivas de saída:
 - Sobrescreve o .json e retorna o codigo de erro
 - Nome do .json eh conhecido, logo nao deve ser retornado
-- 
 """
-def persiste_estrutura_estoque(dados):
-    if not isinstance(dados, dict):
-        print("Arquivo invalido. O parametro recebido nao e um dict") #Arquivo recebido nao e um dict
-        return -3
-    
-    elif "estoque" not in dados or "catalogo" not in dados:
-        print("Estrutura invalida. O dicionario nao esta de acordo com o padrao") #Dicionario recebido nao possui a estrutura correta
-        return -4
-    
+def persiste_estrutura_estoque_catalogo(estoque, catalogo):
+    if not isinstance(estoque, dict) or not isinstance(catalogo, dict):
+        print("Parametro invalido. O parametro recebido nao e um dicionario") # Parametro recebido nao é um dicionario
+        return -8
+
+    dados = {
+        "estoque": estoque,
+        "catalogo": catalogo
+    }
+     
     with open('estrutura.json', 'w') as arquivo:
         json.dump(dados, arquivo, indent=4)
     
     print("Sucesso ao persistir os dados") #.json montado corretamente
     return 1
-
 
 
