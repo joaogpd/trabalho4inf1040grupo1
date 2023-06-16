@@ -405,4 +405,11 @@ def persiste_estrutura(estoque, catalogo):
     print("Sucesso ao persistir os dados") #.json montado corretamente
     return 1
 
+@validaArg
+def gera_log(dict_log):
+    f = open("Log.json", "w")
+    dict_log_json = json.dumps(dict_log)
+    f.write(dict_log_json)
+    f.close()
+    return 0
 
