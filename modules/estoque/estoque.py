@@ -18,9 +18,9 @@ def remove_jogo(nome, estrutura):
 * Parâmetro:
 - estrutura -> dict: estrutura que deve ter chaves impressas
 * Retornos:
-- msgerro1: caso de 'estrutura' não ser dict
-- msgerro2: caso de 'estrutura' estar vazia
-- msgsucesso: caso de sucesso
+- -8: caso de 'estrutura' não ser dict
+- -9: caso de 'estrutura' estar vazia
+- 1: caso de sucesso
 ** Condições de acoplamento:
 * Assertivas de entrada:
 - A função recebe um parâmetro
@@ -29,12 +29,12 @@ def remove_jogo(nome, estrutura):
 """
 def exibe_todos_estoque(estrutura):
   if not isinstance(estrutura, dict):
-    return -2
+    return -8
   if not estrutura:
-    return -1 # Estrutura vazia. Dicionario vazio "valued" como "false"
+    return -9 # Estrutura vazia. Dicionario vazio "valued" como "false"
   for i in estrutura.keys():
     print("Nome: {}".format(i))
-    return 0
+  return 1
 
 def exibe_jogo(nome, estrutura):
     if not isinstance(nome,str):
