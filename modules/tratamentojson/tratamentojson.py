@@ -407,6 +407,9 @@ def persiste_estrutura(estoque, catalogo):
 
 @validaArg
 def gera_log(dict_log):
+    if not isinstance(dict_log,dict):
+        print("Parametro invalido")
+        return -4
     f = open("Log.json", "w")
     dict_log_json = json.dumps(dict_log)
     f.write(dict_log_json)
