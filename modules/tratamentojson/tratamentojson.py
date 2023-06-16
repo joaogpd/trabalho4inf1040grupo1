@@ -4,6 +4,13 @@ import json
 
 __all__ = ["tratar_pedidos_novojogo", "tratar_solicitacao_compra", "restaura_estrutura_estoque", "restaura_estrutura_catalogo", "persiste_estrutura"]
 
+def validaArg(func):
+    def wrapper(*args, **kwargs):
+        if len(args) < 1:
+            print(f"Error, função {func.__name__} não recebeu argumentos")
+        return func(*args, **kwargs)
+    return wrapper
+
 """
 ** Objetivo: Receber a solicitação de novos jogos
 ** Descrição detalhada:
@@ -43,6 +50,7 @@ Em "catalogo", "nome" : "preco"
         ...
     }
 """
+@validaArg
 def tratar_pedidos_novojogo(solicitacao,estoque,catalogo):
     #Recebimento do pedido
     if verificar_json(solicitacao) == -2:
@@ -114,7 +122,7 @@ def tratar_pedidos_novojogo(solicitacao,estoque,catalogo):
 #     "Jogo3": 2
 # }
 
-
+@validaArg
 def tratar_solicitacao_compra(solicitacao, estoque):
 
     erro_quantidade = 0
@@ -245,6 +253,7 @@ Em "catalogo", "nome" : "preco"
 * Interface com o usuário:
 - 
 """
+@validaArg
 def restaura_estrutura_estoque(arquivo_estrutura):
     if not isinstance(arquivo_estrutura, str):
         return -16 # arquivo_estrutura não é string
@@ -292,6 +301,7 @@ def restaura_estrutura_estoque(arquivo_estrutura):
 * Interface com o usuário:
 - 
 """
+@validaArg
 def restaura_estrutura_catalogo(arquivo_estrutura):
     if not isinstance(arquivo_estrutura, str):
         return -16 # arquivo_estrutura não é string
@@ -315,6 +325,7 @@ def restaura_estrutura_catalogo(arquivo_estrutura):
 
 
 # Funcao auxiliar para verificar o arquivo .json a partir do nome (xxxxx.json)
+@validaArg
 def verificar_json(nome_arquivo):
     # Verifica a extensao do arquivo
     if not nome_arquivo.endswith('.json'):
@@ -377,6 +388,7 @@ dados =
 - Sobrescreve o .json e retorna o codigo de erro
 - Nome do .json eh conhecido, logo nao deve ser retornado
 """
+@validaArg
 def persiste_estrutura(estoque, catalogo):
     if not isinstance(estoque, dict) or not isinstance(catalogo, dict):
         print("Parametro invalido. O parametro recebido nao e um dicionario") # Parametro recebido nao é um dicionario
