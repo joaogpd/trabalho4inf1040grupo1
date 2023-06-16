@@ -1,5 +1,12 @@
 __all__ = ["alterar_nome", "alterar_preco", "exibe_todos_catalogo", "cadastrar"]
 
+def validaArg(func):
+    def wrapper(*args, **kwargs):
+        if len(args) < 1:
+            print(f"Error, função {func.__name__} não recebeu argumentos")
+        return func(*args, **kwargs)
+    return wrapper
+
 """
 ** Objetivo: trocar o nome de um jogo do catálogo por um novo
 ** Descrição detalhada:
@@ -25,6 +32,8 @@ __all__ = ["alterar_nome", "alterar_preco", "exibe_todos_catalogo", "cadastrar"]
 - O nome antigo ('nome') deve ter sido removido da estrutura
 - O nome novo ('nome_novo') deve estar presente com o conteúdo do antigo
 """
+
+@validaArg
 def alterar_nome(estrutura, nome, nome_novo):
   if not isinstance(estrutura, dict):
     return -10
@@ -62,6 +71,8 @@ def alterar_nome(estrutura, nome, nome_novo):
 * Assertivas de saída:
 - O nome ('nome') deve ter conteúdo igual ao preço novo passado na função ('preco_novo')
 """
+
+@validaArg
 def alterar_preco(estrutura, nome, preco_novo):
   if not isinstance(estrutura, dict):
     return -13
@@ -94,6 +105,7 @@ def alterar_preco(estrutura, nome, preco_novo):
 * Assertivas de saída:
 - Todos os conteúdos da estrutura foram impressos
 """
+@validaArg
 def exibe_todos_catalogo(estrutura):
   if not isinstance(estrutura, dict):
     return -8
@@ -121,6 +133,7 @@ def exibe_todos_catalogo(estrutura):
 * Assertivas de saída:
 - O jogo de nome 'nome' deve estar na estrutura com o valor preco
 """
+@validaArg
 def cadastrar(estrutura, nome, preco):
     
     # Tratando casos de parametros invalidos
