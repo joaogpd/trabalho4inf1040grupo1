@@ -139,4 +139,4 @@ def cadastrar(estrutura, nome, preco):
     
 
     estrutura[nome] = preco
-    return estrutura
+    return 1
