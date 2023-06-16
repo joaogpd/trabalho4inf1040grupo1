@@ -1,6 +1,7 @@
 import modules.catalogo.catalogo as catalogo
 import modules.estoque.estoque as estoque
 import modules.tratamentojson.tratamentojson as tjson
+import json
 
 def main():
     dict_erros = {
@@ -25,6 +26,8 @@ def main():
 	    -17: "json vazio",
 	    -18: "arquivo com formato inválido"
     }
+
+    dict_log = dict()
 	
     # est_estoque = tjson.restaura_estrutura_estoque()
     # est_catalogo = tjson.restaura_estrutura_catalogo()
@@ -54,42 +57,54 @@ def main():
                 if "exibir" in escolha:
 		    if "jogo" in escolha:
 			nome = input("Nome: ")
-			func(nome, est_estoque)
+			ret = func(nome, est_estoque)
+			dict_log[escolha] = dict_erros[ret]
 		    else:
                         print("Estoque: ")
-                        func(est_estoque)
+                        ret = func(est_estoque)
+			dict_log[escolha] = dict_erros[ret]
                 elif "inserir" in escolha:
                     nome = input("Nome: ")
                     # quantidade = input("Quantidade: ")
-                    func(est_estoque, nome)
+                    ret = func(est_estoque, nome)
+		    dict_log[escolha] = dict_erros[ret]
 	        elif "remover" in escolha:
 		    nome = input("Nome: ")
-		    func(est_estoque, nome)
+		    ret = func(est_estoque, nome)
+		    dict_log[escolha] = dict_erros[ret]
 		elif "quantidade" in escolha:
 		    quantidade = input("Quantidade: ")
 		    nome = input("Nome: ")
-		    func(est_estoque, nome, quantidade)
+		    ret = func(est_estoque, nome, quantidade)
+		    dict_log[escolha] = dict_erros[ret]
             elif "catalogo" in escolha:
 		if "alterar" in escolha:
 		    nome = input("Nome: ")
 		    if "nome" in escolha:
 			nome_novo = input("Nome novo: ")
-			func(est_estoque, nome, nome_novo)
+			ret = func(est_estoque, nome, nome_novo)
+			dict_log[escolha] = dict_erros[ret]
              	    elif "preco" in escolha:
 			preco_novo = input("Preco novo: ")
-			func(est_estoque, nome, preco_novo)
+			ret = func(est_estoque, nome, preco_novo)
+			dict_log[escolha] = dict_erros[ret]
 		elif "exibir" in escolha:
-		        func(est_catalogo)
+		        ret = func(est_catalogo)
+			dict_log[escolha] = dict_erros[ret]
 		elif "cadastrar" in escolha:
 			nome = input("Nome: ")
 			preco = input("Preco: ")
-  			func(est_catalogo, nome, preco)
+  			ret = func(est_catalogo, nome, preco)
+			dict_log[escolha] = dict_erros[ret]
 	    elif "pedidos" in escolha:
 		if "jogos_novos" in "escolha":
 			# func()
 		elif "compras" in "escolha":
 			# func()
-		
+    f = open("Log.json", "w")
+    dict_log_json = json.dumps(dict_log)
+    f.write(dict_log_json)
+    f.close()
 
  
 
