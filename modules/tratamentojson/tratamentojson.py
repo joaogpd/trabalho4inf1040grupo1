@@ -1,3 +1,5 @@
+from modules.catalogo.catalogo import *
+from modules.estoque.estoque import *
 import json
 
 __all__ = ["tratar_pedidos_novojogo", "tratar_solicitacao_compra", "restaura_estrutura_estoque", "restaura_estrutura_catalogo", "persiste_estrutura_estoque"]
@@ -244,7 +246,7 @@ Em "catalogo", "nome" : "preco"
 - 
 """
 def restaura_estrutura_estoque(arquivo_estrutura):
-    if not isistance(arquivo_estrutura, str):
+    if not isinstance(arquivo_estrutura, str):
         return -1 # arquivo_estrutura não é string
     if verificar_json(arquivo_estrutura) == 0:
         # print("Arquivo da estrutura está vazio")
@@ -291,7 +293,7 @@ def restaura_estrutura_estoque(arquivo_estrutura):
 - 
 """
 def restaura_estrutura_catalogo(arquivo_estrutura):
-    if not isistance(arquivo_estrutura, str):
+    if not isinstance(arquivo_estrutura, str):
         return -1 # arquivo_estrutura não é string
     if verificar_json(arquivo_estrutura) == 0:
         # print("Arquivo da estrutura está vazio")
@@ -388,4 +390,6 @@ def persiste_estrutura_estoque(dados):
     
     print("Sucesso ao persistir os dados") #.json montado corretamente
     return 1
+
+
 
