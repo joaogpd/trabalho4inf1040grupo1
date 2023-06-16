@@ -57,35 +57,35 @@ def main():
                     if "jogo" in escolha:
                         nome = input("Nome: ")
                         ret = func(nome, est_estoque)
-                        dict_log[escolha] = dict_erros[ret]
+                        # dict_log[escolha] = dict_erros[ret]
                     else:
                         print("Estoque: ")
                         ret = func(est_estoque)
-                        dict_log[escolha] = dict_erros[ret]
+                        # dict_log[escolha] = dict_erros[ret]
                 elif "inserir" in escolha:
                     nome = input("Nome: ")
                     ret = func(est_estoque, nome)
-                    dict_log[escolha] = dict_erros[ret]
+                    # dict_log[escolha] = dict_erros[ret]
                 elif "quantidade" in escolha:
                     quantidade = input("Quantidade: ")
                     nome = input("Nome: ")
                     ret = func(est_estoque, nome, quantidade)
-                    dict_log[escolha] = dict_erros[ret]
+                    # dict_log[escolha] = dict_erros[ret]
             elif "catalogo" in escolha:
                 if "alterar" in escolha:
                     nome = input("Nome: ")
                     if "nome" in escolha:
                         nome_novo = input("Nome novo: ")
                         ret = func(est_estoque, nome, nome_novo)
-                        dict_log[escolha] = dict_erros[ret]
-                    elif "exibir" in escolha:
-                        ret = func(est_catalogo)
-                        dict_log[escolha] = dict_erros[ret]
-                    elif "cadastrar" in escolha:
-                        nome = input("Nome: ")
-                        preco = input("Preco: ")
-                        ret = func(est_catalogo, nome, preco)
-                        dict_log[escolha] = dict_erros[ret]
+                        # dict_log[escolha] = dict_erros[ret]
+                elif "exibir" in escolha:
+                    ret = func(est_catalogo)
+                    # dict_log[escolha] = dict_erros[ret]
+                elif "cadastrar" in escolha:
+                    nome = input("Nome: ")
+                    preco = input("Preco: ")
+                    ret = func(est_catalogo, nome, preco)
+                    # dict_log[escolha] = dict_erros[ret]
             elif "pedidos" in escolha:
                 if "jogos_novos" in escolha:
                     continue
