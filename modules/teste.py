@@ -345,17 +345,15 @@ def teste_exibe_jogo():
 def teste_gera_log():
     print("gera_log")
 
-    #mensagem correta
-    mensagem_valida="mensagem valida"
-
-    #testando geração com mensagem adequada
-    resultado=gera_log(mensagem_valida)
-
-    if resultado==0:
-        print("Passou no caso 1 (mensagem adequada)")
-    else:
-        print("Não passou no caso 1 (mensagem adequada)")
+    arg_valido = {"blabla": "bla"}
+    arg_invalido = [1,2,3,4]
+    if gera_log(arg_valido) != 0:
+        print("Não passou no caso 1 (estrutura valida")
         return 1
+    if gera_log(arg_invalido) >= 0:
+        print("Não passou no caso 2 (estrutura invalida)")
+        return 1
+    print("Passou nos casos 1 e 2")
     return 0
 
 def main_teste():
