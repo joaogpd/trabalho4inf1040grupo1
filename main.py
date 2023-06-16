@@ -1,7 +1,6 @@
 import modules.catalogo.catalogo as catalogo
 import modules.estoque.estoque as estoque
 import modules.tratamentojson.tratamentojson as tjson
-import json
 
 def main():
     dict_erros = {
