@@ -157,3 +157,4 @@ def aumentar_quantidade(estrutura, nome, quantidade=10):
         return -5   
     estrutura[nome] += quantidade
     return estrutura
+
