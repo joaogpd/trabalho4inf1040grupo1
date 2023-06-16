@@ -254,7 +254,7 @@ Em "catalogo", "nome" : "preco"
 - 
 """
 @validaArg
-def restaura_estrutura_estoque(arquivo_estrutura):
+def restaura_estrutura_estoque(arquivo_estrutura, estoque):
     if not isinstance(arquivo_estrutura, str):
         return -16 # arquivo_estrutura não é string
     if verificar_json(arquivo_estrutura) == 0:
@@ -263,17 +263,16 @@ def restaura_estrutura_estoque(arquivo_estrutura):
     if verificar_json(arquivo_estrutura) == -1:
         # print("Arquivo da estrutura tem formato invalido")
         return -18
- 
-    estrutura_estoque = dict()
+
     with open(arquivo_estrutura) as f:
         json_arquivo = json.load(f)
         
         arquivo_est_estoque = json_arquivo["estoque"]
     
         for nome in arquivo_est_estoque.keys():
-            inserir_jogo(estrutura_estoque, nome, arquivo_est_estoque[nome])
+            inserir_jogo(estoque, nome, arquivo_est_estoque[nome])
     
-    return estrutura_estoque
+    return 1
 
 """
 ** Objetivo: Restaurar a estrutura persistida em arquivo .json referente ao catalogo
@@ -302,7 +301,7 @@ def restaura_estrutura_estoque(arquivo_estrutura):
 - 
 """
 @validaArg
-def restaura_estrutura_catalogo(arquivo_estrutura):
+def restaura_estrutura_catalogo(arquivo_estrutura, catalogo):
     if not isinstance(arquivo_estrutura, str):
         return -16 # arquivo_estrutura não é string
     if verificar_json(arquivo_estrutura) == 0:
@@ -315,14 +314,12 @@ def restaura_estrutura_catalogo(arquivo_estrutura):
     with open(arquivo_estrutura) as f:
         json_arquivo = json.load(f)
 
-        estrutura_catalogo = dict()
         arquivo_est_catalogo = json_arquivo["catalogo"]
                      
         for nome in arquivo_est_catalogo.keys():
-            cadastrar(estrutura_catalogo, nome, arquivo_est_catalogo[nome])
+            cadastrar(catalogo, nome, arquivo_est_catalogo[nome])
     
-    return estrutura_catalogo                 
-
+    return 1
 
 # Funcao auxiliar para verificar o arquivo .json a partir do nome (xxxxx.json)
 @validaArg
