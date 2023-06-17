@@ -1,4 +1,10 @@
 {
-    "estoque": {},
-    "catalogo": {}
+    "estoque": {
+        "jogo1": 10,
+        "jogo2": 10
+    },
+    "catalogo": {
+        "jogo1": 6.0,
+        "jogo2": 2.0
+    }
 }

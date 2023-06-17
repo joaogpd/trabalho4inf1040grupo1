@@ -67,8 +67,8 @@ def main():
                     ret = func(est_estoque, nome)
                     # dict_log[escolha] = dict_erros[ret]
                 elif "quantidade" in escolha:
-                    quantidade = input("Quantidade: ")
                     nome = input("Nome: ")
+                    quantidade = int(input("Quantidade: "))
                     ret = func(est_estoque, nome, quantidade)
                     # dict_log[escolha] = dict_erros[ret]
             elif "catalogo" in escolha:
@@ -78,12 +78,16 @@ def main():
                         nome_novo = input("Nome novo: ")
                         ret = func(est_estoque, nome, nome_novo)
                         # dict_log[escolha] = dict_erros[ret]
+                    if "preco" in escolha:
+                        preco_novo = float(input("Preco novo: "))
+                        ret = func(est_estoque, nome, preco_novo)
                 elif "exibir" in escolha:
+                    print("Catalogo: ")
                     ret = func(est_catalogo)
                     # dict_log[escolha] = dict_erros[ret]
                 elif "cadastrar" in escolha:
                     nome = input("Nome: ")
-                    preco = input("Preco: ")
+                    preco = float(input("Preco: "))
                     ret = func(est_catalogo, nome, preco)
                     # dict_log[escolha] = dict_erros[ret]
             elif "pedidos" in escolha:

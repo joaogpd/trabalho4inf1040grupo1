@@ -255,14 +255,14 @@ Em "catalogo", "nome" : "preco"
 """
 @validaArg
 def restaura_estrutura_estoque(arquivo_estrutura, estoque):
-    if not isinstance(arquivo_estrutura, str):
-        return -16 # arquivo_estrutura não é string
-    if verificar_json(arquivo_estrutura) == 0:
-        # print("Arquivo da estrutura está vazio")
-        return -17
-    if verificar_json(arquivo_estrutura) == -1:
-        # print("Arquivo da estrutura tem formato invalido")
-        return -18
+    # if not isinstance(arquivo_estrutura, str):
+    #     return -16 # arquivo_estrutura não é string
+    # if verificar_json(arquivo_estrutura) == 0:
+    #     # print("Arquivo da estrutura está vazio")
+    #     return -17
+    # if verificar_json(arquivo_estrutura) == -1:
+    #     # print("Arquivo da estrutura tem formato invalido")
+    #     return -18
 
     with open(arquivo_estrutura) as f:
         json_arquivo = json.load(f)
@@ -302,14 +302,14 @@ def restaura_estrutura_estoque(arquivo_estrutura, estoque):
 """
 @validaArg
 def restaura_estrutura_catalogo(arquivo_estrutura, catalogo):
-    if not isinstance(arquivo_estrutura, str):
-        return -16 # arquivo_estrutura não é string
-    if verificar_json(arquivo_estrutura) == 0:
-        # print("Arquivo da estrutura está vazio")
-        return -17
-    if verificar_json(arquivo_estrutura) == -1:
-        # print("Arquivo da estrutura tem formato invalido")
-        return -18
+    # if not isinstance(arquivo_estrutura, str):
+    #     return -16 # arquivo_estrutura não é string
+    # if verificar_json(arquivo_estrutura) == 0:
+    #     # print("Arquivo da estrutura está vazio")
+    #     return -17
+    # if verificar_json(arquivo_estrutura) == -1:
+    #     # print("Arquivo da estrutura tem formato invalido")
+    #     return -18
     
     with open(arquivo_estrutura) as f:
         json_arquivo = json.load(f)
