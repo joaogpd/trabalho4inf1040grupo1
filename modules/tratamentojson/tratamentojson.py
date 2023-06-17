@@ -69,7 +69,8 @@ def tratar_pedidos_novojogo(solicitacao,estoque,catalogo):
         nome_jogo = jogo['nome']
 
         if nome_jogo not in catalogo:
-            valor_jogo=input("Digite o valor do jogo {}:",format(nome_jogo))
+            print("Digite o valor do jogo "+nome_jogo+":")
+            valor_jogo=input()
             cadastrar(catalogo,nome_jogo,valor_jogo) # Adiciona no catalogo o jogo
             aumentar_quantidade(estoque, nome_jogo)  # Compra 10 unidades
             return 0
