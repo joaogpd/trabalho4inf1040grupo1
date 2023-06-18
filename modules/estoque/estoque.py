@@ -45,17 +45,41 @@ def exibe_todos_estoque(estrutura):
     print("Nome: {}".format(i))
   return 1
 
+"""
+** Objetivo: exibir informação de um item presente no estoque
+** Descrição detalhada:
+- Valida o tipo do parâmetro recebido
+- Confere se a estrutura está vazia
+- Imprime a chave desejada e a sua quantidade
+** Acoplamento
+* Parâmetro:
+- nome -> string com o nome do jogo a ser impresso
+- estrutura -> dict: estrutura que deve ter chaves impressas
+* Retornos:
+- -11: caso de 'nome' não ser string
+- -8: caso de 'estrutura' não ser dict
+- -9: caso de 'estrutura' estar vazia
+- 1: caso de sucesso
+- 0: caso de jogo não encontrado
+** Condições de acoplamento:
+* Assertivas de entrada:
+- A função recebe dois parâmetros
+* Assertivas de saída:
+- As informações desejadas serão impressas
+"""
 @validaArg
 def exibe_jogo(nome, estrutura):
     if not isinstance(nome,str):
-        return -2 # Nome inválido
-    if estrutura==0:
-        print("Estrutura vazia")
-        return -1 #Estrutura vazia
+        return -11 #Nome inválido
+    if not isinstance(estrutura, dict):
+        return -8 # Estrutura inválida
+    if estrutura=={}:
+        return -9 #Estrutura vazia
     if nome in estrutura:
-        print("Nome: {}\nPreco: {}", format(nome, estrutura[nome]))
-        return 0 # Jogo existente
-
+        print("Nome: "+nome+"\nQuantidade:",estrutura[nome])
+        return 1 #Jogo existente
+    else:
+      return 0 #Jogo não encontrado
     
 """
 ** Objetivo: inserir unidades de um jogo no estoque
