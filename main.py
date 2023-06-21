@@ -44,6 +44,7 @@ def main():
         for i in opcoes.keys():
             print(i, end=" ")
         print("")
+        print("Digite quit para sair")
         escolha = input()
         if escolha not in opcoes.keys():
             if escolha == "quit":
@@ -57,15 +58,15 @@ def main():
                     if "jogo" in escolha:
                         nome = input("Nome: ")
                         ret = func(nome, est_estoque)
-                        # dict_log[escolha] = dict_erros[ret]
+                        dict_log[escolha] = dict_erros[ret]
                     else:
                         print("Estoque: ")
                         ret = func(est_estoque)
-                        # dict_log[escolha] = dict_erros[ret]
+                        dict_log[escolha] = dict_erros[ret]
                 elif "inserir" in escolha:
                     nome = input("Nome: ")
                     ret = func(est_estoque, nome)
-                    # dict_log[escolha] = dict_erros[ret]
+                    dict_log[escolha] = dict_erros[ret]
                 elif "quantidade" in escolha:
                     nome = input("Nome: ")
                     if "diminuir" in escolha:
@@ -73,26 +74,26 @@ def main():
                         ret = func(est_estoque, nome, quantidade)
                     elif "aumentar" in escolha:
                         ret = func(est_estoque, nome)
-                    # dict_log[escolha] = dict_erros[ret]
+                    dict_log[escolha] = dict_erros[ret]
             elif "catalogo" in escolha:
                 if "alterar" in escolha:
                     nome = input("Nome: ")
                     if "nome" in escolha:
                         nome_novo = input("Nome novo: ")
                         ret = func(est_estoque, nome, nome_novo)
-                        # dict_log[escolha] = dict_erros[ret]
+                        dict_log[escolha] = dict_erros[ret]
                     if "preco" in escolha:
                         preco_novo = float(input("Preco novo: "))
                         ret = func(est_estoque, nome, preco_novo)
                 elif "exibir" in escolha:
                     print("Catalogo: ")
                     ret = func(est_catalogo)
-                    # dict_log[escolha] = dict_erros[ret]
+                    dict_log[escolha] = dict_erros[ret]
                 elif "cadastrar" in escolha:
                     nome = input("Nome: ")
                     preco = float(input("Preco: "))
                     ret = func(est_catalogo, nome, preco)
-                    # dict_log[escolha] = dict_erros[ret]
+                    dict_log[escolha] = dict_erros[ret]
             elif "pedidos" in escolha:
                 if "jogos_novos" in escolha:
                     nome_arquivo = input("Insira o nome do arquivo: ")
@@ -100,7 +101,8 @@ def main():
                 elif "compras" in escolha:
                     nome_arquivo = input("Insira o nome do arquivo: ")
                     func(nome_arquivo, est_estoque)
-    # gera_log(dict_log)
+            
+    tjson.gera_log(dict_log)
                 
         
 if __name__ == '__main__':
