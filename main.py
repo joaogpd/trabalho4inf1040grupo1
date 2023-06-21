@@ -33,8 +33,8 @@ def main():
     tjson.restaura_estrutura_estoque("estrutura.json", est_estoque)
     tjson.restaura_estrutura_catalogo("estrutura.json", est_catalogo)
     opcoes = {"exibir_estoque" : estoque.exibe_todos_estoque, "inserir_estoque" : estoque.inserir_jogo, 
-	          "remover_estoque" : estoque.remove_jogo, "exibir_jogo_estoque" : estoque.exibe_jogo, "diminuir_quantidade" : estoque.diminuir_quantidade, 
-	          "aumentar_quantidade" : estoque.aumentar_quantidade, "alterar_nome_catalogo" : catalogo.alterar_nome, "alterar_preco_catalogo" : catalogo.alterar_preco, 
+	          "remover_estoque" : estoque.remove_jogo, "exibir_jogo_estoque" : estoque.exibe_jogo, "diminuir_quantidade_estoque" : estoque.diminuir_quantidade, 
+	          "aumentar_quantidade_estoque" : estoque.aumentar_quantidade, "alterar_nome_catalogo" : catalogo.alterar_nome, "alterar_preco_catalogo" : catalogo.alterar_preco, 
 	          "exibir_catalogo" : catalogo.exibe_todos_catalogo, "cadastrar_catalogo" : catalogo.cadastrar, "ler_pedidos_jogos_novos" : tjson.tratar_pedidos_novojogo, 
 	          "ler_pedidos_compras" : tjson.tratar_solicitacao_compra}
     
@@ -68,8 +68,11 @@ def main():
                     # dict_log[escolha] = dict_erros[ret]
                 elif "quantidade" in escolha:
                     nome = input("Nome: ")
-                    quantidade = int(input("Quantidade: "))
-                    ret = func(est_estoque, nome, quantidade)
+                    if "diminuir" in escolha:
+                        quantidade = int(input("Quantidade: "))
+                        ret = func(est_estoque, nome, quantidade)
+                    elif "aumentar" in escolha:
+                        ret = func(est_estoque, nome)
                     # dict_log[escolha] = dict_erros[ret]
             elif "catalogo" in escolha:
                 if "alterar" in escolha:
