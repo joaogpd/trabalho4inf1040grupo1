@@ -1,7 +1,8 @@
 {
     "estoque": {
-        "jogo1": 10,
-        "jogo2": 10
+        "jogo1": 16,
+        "jogo2": 10,
+        "abc": 10
     },
     "catalogo": {
         "jogo1": 6.0,

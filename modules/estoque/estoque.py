@@ -192,6 +192,6 @@ def aumentar_quantidade(estrutura, nome, quantidade=10):
     if not isinstance(nome, str):
         print("Erro, o nome não é uma string")
         return -5   
-    estrutura[nome] += quantidade
+    estrutura[nome] += simples.aumenta10()
     return 1
 
