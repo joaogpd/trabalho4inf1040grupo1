@@ -48,7 +48,7 @@ def main():
         if escolha not in opcoes.keys():
             if escolha == "quit":
                 break
-            print("Opção desconhecida")
+            print(f"Opção desconhecida '{escolha}'")
             continue
         else:
             func = opcoes[escolha]
@@ -92,9 +92,11 @@ def main():
                     # dict_log[escolha] = dict_erros[ret]
             elif "pedidos" in escolha:
                 if "jogos_novos" in escolha:
-                    continue
+                    nome_arquivo = input("Insira o nome do arquivo: ")
+                    func(nome_arquivo, est_estoque, est_catalogo)
                 elif "compras" in escolha:
-                    continue
+                    nome_arquivo = input("Insira o nome do arquivo: ")
+                    func(nome_arquivo, est_estoque)
     # gera_log(dict_log)
                 
         
