@@ -1,4 +1,8 @@
+from ctypes import *
+
 __all__ = ["remove_jogo", "exibe_todos_estoque", "exibe_jogo", "inserir_jogo", "diminuir_quantidade", "aumentar_quantidade"]
+
+simples = CDLL("/home/joaopeixoto/Desktop/other/inf1040/trabalho4inf1040grupo1/modules/estoque/simples.so")
 
 def validaArg(func):
     def wrapper(*args, **kwargs):
