@@ -1,11 +1,12 @@
 {
     "estoque": {
-        "jogo1": 10.0,
         "jogo2": 10,
-        "abc": 10
+        "abc": 20,
+        "abcd": 10
     },
     "catalogo": {
         "jogo1": 6.0,
-        "jogo2": 2.0
+        "jogo2": 2.0,
+        "bruh": 50.0
     }
 }

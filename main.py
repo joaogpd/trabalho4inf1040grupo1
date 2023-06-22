@@ -40,11 +40,11 @@ def main():
     
     while True:
         tjson.persiste_estrutura(est_estoque, est_catalogo)
-        print("Escolha uma opção: ")
+        print("\nEscolha uma opção: ")
         for i in opcoes.keys():
-            print(i, end=" ")
+            print(i, end="  ")
         print("")
-        print("Digite quit para sair")
+        print("\nDigite quit para sair")
         escolha = input()
         if escolha not in opcoes.keys():
             if escolha == "quit":

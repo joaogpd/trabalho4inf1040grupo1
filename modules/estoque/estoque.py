@@ -122,7 +122,7 @@ def inserir_jogo(estrutura, nome, quantidade=10):
     # tratando casos de parametros invalidos
 
     estrutura[nome] = quantidade
-    return estrutura
+    return 1
 
 """
 ** Objetivo: atualizar unidades de um jogo no estoque
