@@ -84,11 +84,11 @@ def main():
                     nome = input("Nome: ")
                     if "nome" in escolha:
                         nome_novo = input("Nome novo: ")
-                        ret = func(est_estoque, nome, nome_novo)
+                        ret = func(est_catalogo, nome, nome_novo)
                         dict_log[escolha] = dict_erros[ret]
                     if "preco" in escolha:
                         preco_novo = float(input("Preco novo: "))
-                        ret = func(est_estoque, nome, preco_novo)
+                        ret = func(est_catalogo, nome, preco_novo)
                 elif "exibir" in escolha:
                     print("Catalogo: ")
                     ret = func(est_catalogo)
