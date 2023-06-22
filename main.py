@@ -67,6 +67,10 @@ def main():
                     nome = input("Nome: ")
                     ret = func(est_estoque, nome)
                     dict_log[escolha] = dict_erros[ret]
+                elif "remover" in escolha:
+                    nome = input("Nome: ")
+                    ret = func(nome, est_estoque)
+                    dict_log[escolha] = dict_erros[ret]
                 elif "quantidade" in escolha:
                     nome = input("Nome: ")
                     if "diminuir" in escolha:
