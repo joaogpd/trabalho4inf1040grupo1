@@ -74,8 +74,11 @@ def main():
                 elif "quantidade" in escolha:
                     nome = input("Nome: ")
                     if "diminuir" in escolha:
-                        quantidade = int(input("Quantidade: "))
-                        ret = func(est_estoque, nome, quantidade)
+                        try:
+                            quantidade = int(input("Quantidade: "))
+                            ret = func(est_estoque, nome, quantidade)
+                        except:
+                            print("Insira valor válido de quantidade.")
                     elif "aumentar" in escolha:
                         ret = func(est_estoque, nome)
                     dict_log[escolha] = dict_erros[ret]
@@ -87,17 +90,24 @@ def main():
                         ret = func(est_catalogo, nome, nome_novo)
                         dict_log[escolha] = dict_erros[ret]
                     if "preco" in escolha:
-                        preco_novo = float(input("Preco novo: "))
-                        ret = func(est_catalogo, nome, preco_novo)
+                        try:
+                            preco_novo = float(input("Preco novo: "))
+                            ret = func(est_catalogo, nome, preco_novo)
+                            dict_log[escolha] = dict_erros[ret]
+                        except:
+                            print("Insira valor válido de preço.")
                 elif "exibir" in escolha:
                     print("Catalogo: ")
                     ret = func(est_catalogo)
                     dict_log[escolha] = dict_erros[ret]
                 elif "cadastrar" in escolha:
                     nome = input("Nome: ")
-                    preco = float(input("Preco: "))
-                    ret = func(est_catalogo, nome, preco)
-                    dict_log[escolha] = dict_erros[ret]
+                    try:
+                        preco = float(input("Preco: "))
+                        ret = func(est_catalogo, nome, preco)
+                        dict_log[escolha] = dict_erros[ret]
+                    except:
+                        print("Insira valor válido de preço.")
             elif "pedidos" in escolha:
                 if "jogos_novos" in escolha:
                     nome_arquivo = input("Insira o nome do arquivo: ")

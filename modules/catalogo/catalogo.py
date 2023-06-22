@@ -45,7 +45,7 @@ def alterar_nome(estrutura, nome, nome_novo):
     return -12
   else:
     estrutura[nome_novo] = estrutura[nome]
-    del estrutura[nome_novo]
+    del estrutura[nome]
     return 1
   
 """
