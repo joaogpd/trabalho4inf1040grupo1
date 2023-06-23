@@ -418,6 +418,74 @@ def teste_exibe_jogo():
     else:
         print("Não passou no caso 4 (jogo não presente)") 
 
+def teste_alterar_quantidade():
+    estrutura_valida = {"nome1":10, "nome2":20, "nome3":30}
+
+    print("diminuir_quantidade()")
+    # Caso 1: estrutura não é dict
+    execution_result = diminuir_quantidade("", "nome2", 1)
+    if execution_result == -4:
+        print("Passou no caso 1 (estrutura não é dict)")
+    else:
+        print("Não passou no caso 1 (estrutura não é dict)")
+    
+    # Caso 2: quantidade não é int
+    execution_result = diminuir_quantidade(estrutura_valida, "nome2", "1")
+    if execution_result == -5:
+        print("Passou no caso 2 (quantidade não é int)")
+    else:
+        print("Não passou no caso 2 (quantidade não é int)")
+
+    # Caso 3: nome não é str
+    execution_result = diminuir_quantidade(estrutura_valida, 3, 1)
+    if execution_result == -5:
+        print("Passou no caso 3 (nome não é str)")
+    else:
+        print("Não passou no caso 3 (nome não é str)")
+
+    # Caso 4: sucesso
+    execution_result = diminuir_quantidade(estrutura_valida, "nome2", 10)
+    if execution_result == 1:
+        print("Passou no caso 4 (sucesso)")
+    else:
+        print("Não passou no caso 4 (sucesso)")
+    
+    print("aumentar_quantidade()")
+    # Caso 1: estrutura não é dict
+    execution_result = aumentar_quantidade("", "nome2", 1)
+    if execution_result == -4:
+        print("Passou no caso 1 (estrutura não é dict)")
+    else:
+        print("Não passou no caso 1 (estrutura não é dict)")
+    
+    # Caso 2: quantidade não é int
+    execution_result = aumentar_quantidade(estrutura_valida, "nome2", "1")
+    if execution_result == -5:
+        print("Passou no caso 2 (quantidade não é int)")
+    else:
+        print("Não passou no caso 2 (quantidade não é int)")
+
+    # Caso 3: nome não é str
+    execution_result = aumentar_quantidade(estrutura_valida, 3, 1)
+    if execution_result == -5:
+        print("Passou no caso 3 (nome não é str)")
+    else:
+        print("Não passou no caso 3 (nome não é str)")
+
+    # Caso 4: nome não presente na estrutura
+    execution_result = aumentar_quantidade(estrutura_valida, "abc", 1)
+    if execution_result == 0:
+        print("Passou no caso 4 (nome não presente)")
+    else:
+        print("Não passou no caso 4 (nome não presente)")
+
+    # Caso 5: sucesso
+    execution_result = diminuir_quantidade(estrutura_valida, "nome2", 10)
+    if execution_result == 1:
+        print("Passou no caso 5 (sucesso)")
+    else:
+        print("Não passou no caso 5 (sucesso)")
+
 def teste_gera_log():
     print("gera_log")
 
@@ -441,6 +509,7 @@ def main_teste():
     teste_cadastrar()
     teste_exibe_todos()
     teste_exibe_jogo()
+    teste_alterar_quantidade()
     # teste_gera_log()
     print("TESTING DONE")
 
