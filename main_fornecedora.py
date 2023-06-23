@@ -30,8 +30,11 @@ def main():
 
     est_estoque = dict()
     est_catalogo = dict()
-    tjson.restaura_estrutura_estoque("estrutura.json", est_estoque)
-    tjson.restaura_estrutura_catalogo("estrutura.json", est_catalogo)
+    try:
+        tjson.restaura_estrutura_estoque("estrutura.json", est_estoque)
+        tjson.restaura_estrutura_catalogo("estrutura.json", est_catalogo)
+    except:
+        print("O arquivo estrutura.json ainda não existe")
     opcoes = {"exibir_estoque" : estoque.exibe_todos_estoque, "inserir_estoque" : estoque.inserir_jogo, 
 	          "remover_estoque" : estoque.remove_jogo, "exibir_jogo_estoque" : estoque.exibe_jogo, "diminuir_quantidade_estoque" : estoque.diminuir_quantidade, 
 	          "aumentar_quantidade_estoque" : estoque.aumentar_quantidade, "alterar_nome_catalogo" : catalogo.alterar_nome, "alterar_preco_catalogo" : catalogo.alterar_preco, 
