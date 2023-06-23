@@ -1,8 +1,9 @@
 from ctypes import *
+import os
 
 __all__ = ["remove_jogo", "exibe_todos_estoque", "exibe_jogo", "inserir_jogo", "diminuir_quantidade", "aumentar_quantidade"]
 
-# simples = CDLL("/home/joaopeixoto/Desktop/other/inf1040/trabalho4inf1040grupo1/modules/estoque/simples.so")
+simples = CDLL(os.path.abspath("modules/estoque/simples.so"));
 
 def validaArg(func):
     def wrapper(*args, **kwargs):
@@ -196,6 +197,6 @@ def aumentar_quantidade(estrutura, nome, quantidade=10):
     if not isinstance(nome, str):
         print("Erro, o nome não é uma string")
         return -5   
-    estrutura[nome] += 10
+    estrutura[nome] += simples.retorna10();
     return 1
 
