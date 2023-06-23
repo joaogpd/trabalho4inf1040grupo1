@@ -1,5 +1,5 @@
 from catalogo.catalogo import *
-#from estoque.estoque import *
+from estoque.estoque import *
 #from tratamentojson.tratamentojson import *
 
 def teste_atualizacao_preco_e_nome():
@@ -88,38 +88,40 @@ def teste_atualizacao_preco_e_nome():
 
 def teste_remove_jogo():
     print("remove_jogo")
-    #estrutura ficticia
-    estrutura = {"nome1":0, "nome2":10, "nome3":21}
+    # estrutura ficticia
+    estrutura = {"nome1": 0, "nome2": 10, "nome3": 21}
     nome_invalido = "nome0"
     nome_valido = "nome1"
     estruturaAux = estrutura
 
-    #testando remoção de jogo invalido
-    remove_jogo(nome_invalido, estrutura)
-    if estrutura == estruturaAux:
+    # testando remoção de jogo invalido
+    execution_result = remove_jogo(nome_invalido, estrutura)
+    if execution_result == 0:
         print("Passou no caso 1 (nome_nao_presente)")
     else:
         print("Não passou no caso 1 (nome_nao_presente)")
-        return 1
 
-    #testando remoção de jogo valido
-    remove_jogo(nome_valido,estrutura)
-    if nome_valido not in estrutura.keys():
-        print("Passou no caso 3 (nome_presente)")
+    # testando remoção de jogo valido
+    execution_result = remove_jogo(nome_valido, estrutura)
+    if execution_result == 1:
+        print("Passou no caso 2 (nome_presente)")
     else:
-        print("Não passou no caso 3 (nome_presente)")
-        return 1
+        print("Não passou no caso 2 (nome_presente)")
 
-    #testando remoção de jogo já removido
+    # testando remoção de jogo já removido
     estruturaAux = estrutura
-    remove_jogo(nome_valido,estrutura)
-    if estruturaAux == estrutura:
-        print("Passou no caso 2 (nome_ja_removido)")
+    execution_result = remove_jogo(nome_valido, estrutura)
+    if execution_result == 0:
+        print("Passou no caso 3 (nome_ja_removido)")
     else:
-        print("Não passou no caso 2 (nome_ja_removido)")
-        return 1
+        print("Não passou no caso 3 (nome_ja_removido)")
 
-    return 0
+    # caso de nome não ser str
+    execution_result = remove_jogo(10, estrutura)
+    if execution_result == -1:
+        print("Passou no caso 4 (nome_nao_str)")
+    else:
+        print("Não passou no caso 4 (nome_nao_str)")
 
 
 def teste_restaura_persiste():
@@ -367,7 +369,7 @@ def teste_gera_log():
 
 def main_teste():
     teste_atualizacao_preco_e_nome()
-    # teste_remove_jogo()
+    teste_remove_jogo()
     # teste_restaura_persiste()
     # teste_recebe_pedidos()
     # teste_insere_jogo()
