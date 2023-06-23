@@ -215,11 +215,11 @@ def teste_insere_jogo():
 
     nome_valido = "nome4"
     nome_invalido = 1990
-    preco_valido = 40
-    preco_invalido = "quarenta"
+    quantidade_valida = 40
+    quantidade_invalida = "quarenta"
 
     # Caso 1: nome valido, quantidade válida
-    execution_result = inserir_jogo(estrutura, nome_valido, preco_valido)
+    execution_result = inserir_jogo(estrutura, nome_valido, quantidade_valida)
     if execution_result == 1:
         print("Passou no caso 1 (parâmetros válidos)")
     else:
@@ -227,7 +227,7 @@ def teste_insere_jogo():
 
     # Caso 2: nome valido, quantidade inválida
     # Funcao insere_jogo deve retornar codigo de erro para preco invalido (-5)
-    execution_result = inserir_jogo(estrutura, nome_valido, preco_invalido)
+    execution_result = inserir_jogo(estrutura, nome_valido, quantidade_invalida)
     if execution_result == -5:
         print("Passou no caso 2 (quantidade inválida)")
     else:
@@ -235,14 +235,14 @@ def teste_insere_jogo():
 
     # Caso 3: nome invalido, quantidade válida
     # Funcao insere_jogo deve retonar codigo de erro para nome invalido (-5)
-    execution_result = inserir_jogo(estrutura, nome_invalido, preco_valido)
+    execution_result = inserir_jogo(estrutura, nome_invalido, quantidade_valida)
     if execution_result == -5:
         print("Passou no caso 3 (nome inválido)")
     else:
         print("Não passou no caso 3 (nome inválido)")
 
     # Caso 4: estrutura inválida
-    execution_result = inserir_jogo("", nome_valido, preco_valido)
+    execution_result = inserir_jogo("", nome_valido, quantidade_valida)
     if execution_result == -4:
         print("Passou no caso 4 (estrutura inválida)")
     else:
