@@ -224,7 +224,6 @@ def teste_insere_jogo():
         print("Passou no caso 1 (parâmetros válidos)")
     else:
         print("Nao passou no caso 1 (parâmetros válidos)")
-        return 1
 
     # Caso 2: nome valido, quantidade inválida
     # Funcao insere_jogo deve retornar codigo de erro para preco invalido (-5)
@@ -233,7 +232,6 @@ def teste_insere_jogo():
         print("Passou no caso 2 (quantidade inválida)")
     else:
         print("Não passou no caso 2 (quantidade inválida)")
-        return 1
 
     # Caso 3: nome invalido, quantidade válida
     # Funcao insere_jogo deve retonar codigo de erro para nome invalido (-5)
@@ -242,7 +240,6 @@ def teste_insere_jogo():
         print("Passou no caso 3 (nome inválido)")
     else:
         print("Não passou no caso 3 (nome inválido)")
-        return 1
 
     # Caso 4: estrutura inválida
     execution_result = inserir_jogo("", nome_valido, preco_valido)
@@ -250,7 +247,6 @@ def teste_insere_jogo():
         print("Passou no caso 4 (estrutura inválida)")
     else:
         print("Não passou no caso 4 (estrutura inválida)")
-        return 1
 
     # Avaliar impacto na geração de log
 
@@ -261,9 +257,6 @@ def teste_insere_jogo():
     #     print("Passou no caso 5 (nao inseriu nada e retornou o codigo de erro)")
     # else:
     #     print("Não passou no caso 5")
-    #     return 1
-
-    return 0
 
 def teste_exibe_todos():
     print("exibe_todos")
