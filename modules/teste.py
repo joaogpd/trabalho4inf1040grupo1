@@ -9,37 +9,81 @@ def teste_atualizacao_preco_e_nome():
   nome_novo = "jogonovo"
   preco_novo = 12
 
+  dados[nome_presente] = 10
+
   print("alterar_nome()")
   # Caso 1: nome de jogo nao presente
   execution_result = alterar_nome(dados, nome_nao_presente, "qualquer")
   if execution_result == -12:
-    print("Passou no caso 1")
+    print("Passou no caso 1 (nome de jogo não presente)")
   else:
-    print("Não passou no caso 1")
+    print("Não passou no caso 1 (nome de jogo não presente)")
   # Confirmar mensagem de erro de jogo nao encontrado
 
   # Caso 2: nome de jogo presente
-  alterar_nome(dados, nome_presente, nome_novo)
+  execution_result = alterar_nome(dados, nome_presente, nome_novo)
   if execution_result == 1:
-    print("Passou no caso 2")
+    print("Passou no caso 2 (nome de jogo presente)")
   else:
-    print("Não passou no caso 2")
+    print("Não passou no caso 2 (nome de jogo presente)")
+
+  # Caso 3: estrutura não é dict
+  execution_result = alterar_nome("abc", nome_presente, nome_novo)
+  if execution_result == -10:
+    print("Passou no caso 3 (estrutura não é dict)")
+  else:
+    print("Não passou no caso 3 (estrutura não é dict)")
+
+  # Caso 4: nome não é str
+  execution_result = alterar_nome(dados, 10, nome_novo)
+  if execution_result == -11:
+    print("Passou no caso 4 (nome não é str)")
+  else:
+    print("Não passou no caso 4 (nome não é str)")
+
+  # Caso 5: nome_novo não é str
+  execution_result = alterar_nome(dados, nome_presente, 5)
+  if execution_result == -11:
+    print("Passou no caso 5 (nome_novo não é str)")
+  else:
+    print("Não passou no caso 5 (nome_novo não é str)")
 
   print("alterar_preco()")
   # Caso 1: preço de jogo nao presente
   execution_result = alterar_preco(dados, nome_nao_presente, 23)
   if execution_result == -12:
-    print("Passou no caso 1")
+    print("Passou no caso 1 (preço de jogo não presente)")
   else:
-    print("Não passou no caso 1")
+    print("Não passou no caso 1 (preço de jogo não presente)")
   # Confirmar mensagem de erro de jogo nao encontrado
 
   # Caso 2: preço de jogo presente
   execution_result = alterar_preco(dados, nome_novo, preco_novo)
   if execution_result == 1:
-    print("Passou no caso 2")
+    print("Passou no caso 2 (preço de jogo presente)")
   else:
-    print("Não passou no caso 2")
+    print("Não passou no caso 2 (preço de jogo presente)")
+
+  # Caso 3: estrutura não é dict
+  execution_result = alterar_preco("abc", nome_presente, preco_novo)
+  if execution_result == -13:
+    print("Passou no caso 3 (estrutura não é dict)")
+  else:
+    print("Não passou no caso 3 (estrutura não é dict)")
+
+  # Caso 4: nome não é str
+  execution_result = alterar_preco(dados, 10, preco_novo)
+  if execution_result == -14:
+    print("Passou no caso 4 (nome não é str)")
+  else:
+    print("Não passou no caso 4 (nome não é str)")
+
+  # Caso 5: preco_novo não é numeric
+  execution_result = alterar_preco(dados, nome_presente, "abc")
+  if execution_result == -15:
+    print("Passou no caso 5 (preco_novo não é str)")
+  else:
+    print("Não passou no caso 5 (preco_novo não é str)")
 
 
 def teste_remove_jogo():
