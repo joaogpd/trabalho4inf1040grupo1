@@ -124,17 +124,28 @@ def tratar_pedidos_novojogo(solicitacao,estoque,catalogo):
 
 @validaArg
 def tratar_solicitacao_compra(solicitacao, estoque):
-
+    dict_retorno = {}
     erro_quantidade = 0
     erro_cadastro = 0
 
     #Verifica o arquivo de solicitacao
     if verificar_json(solicitacao) == -2:
         print("Arquivo de solicitacao .json está vazio")
+        dict_retorno["erro"] = -2
+        dict_log_json = json.dumps(dict_retorno)
+        f = open("retorno.json", "w")
+        f.write(dict_log_json)
+        f.close()
+
         return -2 #Arquivo vazio
     
     elif verificar_json(solicitacao) == -3:
         print("Arquivo de solicitacao é invalido")
+        dict_retorno["erro"] = -3
+        dict_log_json = json.dumps(dict_retorno)
+        f = open("retorno.json", "w")
+        f.write(dict_log_json)
+        f.close()
         return -3 #Arquivo invalido
 
     # Carrega o .JSON
@@ -150,7 +161,7 @@ def tratar_solicitacao_compra(solicitacao, estoque):
             quantidade_disponivel = estoque[nome_jogo]
             if quantidade_disponivel == 0:
                 print(f"O jogo {nome_jogo} esta em falta")
-
+                dict_retorno[nome_jogo] = 0
                 # Repoe o estoque
                 aumentar_quantidade(estoque, nome_jogo)  # Compra 10 unidades
                 
@@ -158,6 +169,7 @@ def tratar_solicitacao_compra(solicitacao, estoque):
                 erro_quantidade+=1
 
             elif quantidade_disponivel < quantidade_solicitada:
+                dict_retorno[nome_jogo] = quantidade_disponivel
                 print(f"O jogo {nome_jogo} possui quantidade insuficiente em estoque")
                 print(f"Quantidade disponível: {quantidade_disponivel}")
                 print(f"Quantidade solicitada: {quantidade_solicitada}")
@@ -170,6 +182,7 @@ def tratar_solicitacao_compra(solicitacao, estoque):
                 erro_quantidade+=1
 
             elif quantidade_disponivel == quantidade_solicitada:
+                dict_retorno[nome_jogo] = quantidade_disponivel
                 diminuir_quantidade(estoque, nome_jogo, quantidade_solicitada) # Remove/Vende todas unidades solicitadas
                 
                 print(f"O jogo {nome_jogo} foi comprado com sucesso")
@@ -181,18 +194,26 @@ def tratar_solicitacao_compra(solicitacao, estoque):
                 print(f"Um pedido de reposicao do estoque já foi realizado")
 
             else:
+                dict_retorno[nome_jogo] = quantidade_solicitada
                 diminuir_quantidade(estoque, nome_jogo, quantidade_solicitada) # Remove/Vende todas unidades solicitadas
 
                 print(f"O jogo {nome_jogo} foi comprado com sucesso")
                 print(f"Quantidade restante: {quantidade_disponivel - quantidade_solicitada}")
 
         else:
+            dict_retorno[nome_jogo] = -1
             print(f"O jogo {nome_jogo} não esta presente no estoque.")
             erro_cadastro+=1
         
         print('--')
 
     # Retorno    
+
+    dict_log_json = json.dumps(dict_retorno)
+    f = open("retorno.json", "w")
+    f.write(dict_log_json)
+    f.close()
+
     if erro_quantidade >= 1 and erro_cadastro >= 1:
         print("1 ou mais jogos sem cadastro e/ou com quantidade insuficiente")
         return -7 # 1+ jogos sem cadastro e/ou quantidade insuficiente
