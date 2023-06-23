@@ -319,93 +319,104 @@ def teste_cadastrar():
     #     print("Não passou no caso 5")
 
 def teste_exibe_todos():
-    print("exibe_todos")
+    print("exibe_todos_catalogo()")
 
-    #TAD correto
+    # TAD correto
     estrutura_valida = {"nome1":10,"nome2":20,"nome3":30}
     
-    #TAD incorreto
+    # TAD incorreto
     estrutura_invalida = {}
 
-    #testando exibição com estrutura invalida
-    resultado = exibe_todos_estoque(estrutura_invalida)
-    
-    if resultado == -1:
-        print("Passou no caso 1 (estrutura vazia)")
-        return 1
+    # Caso 1: estrutura não é dict
+    execution_result = exibe_todos_estoque("")
+    if execution_result == -8:
+        print("Passou no caso 1 (estrutura não é dict)")
     else:
-        print("Não passou no caso 1 (estrutura vazia)")
+        print("Não passou no caso 1 (estrutura não é dict)")
 
-    #testando exibição com estrutura não vazia
-    resultado = exibe_todos(estrutura_valida)
-
-    if resultado == 0:
-        print("Passou no caso 2 (estrutura não vazia)")
+    # Caso 2: estrutura válida
+    execution_result = exibe_todos_estoque(estrutura_valida)
+    if execution_result == 1:
+        print("Passou no caso 2 (estrutura válida)")
     else:
-        print("Não passou no caso 2 (estrutura não vazia)")
-        return 1
-    
-    return 0
+        print("Não passou no caso 2 (estrutura válida)")
+
+    # Caso 3: estrutura vazia
+    execution_result = exibe_todos_estoque(estrutura_invalida)
+    if execution_result == -9:
+        print("Passou no caso 3 (estrutura vazia)")
+    else:
+        print("Não passou no caso 3 (estrutura vazia)")
+
+    print("exibe_todos_catalogo()")
+
+    # Caso 1: estrutura não é dict
+    execution_result = exibe_todos_catalogo("")
+    if execution_result == -8:
+        print("Passou no caso 1 (estrutura não é dict)")
+    else:
+        print("Não passou no caso 1 (estrutura não é dict)")
+
+    # Caso 2: estrutura válida
+    execution_result = exibe_todos_catalogo(estrutura_valida)
+    if execution_result == 1:
+        print("Passou no caso 2 (estrutura válida)")
+    else:
+        print("Não passou no caso 2 (estrutura válida)")
+
+    # Caso 3: estrutura vazia
+    execution_result = exibe_todos_catalogo(estrutura_invalida)
+    if execution_result == -9:
+        print("Passou no caso 3 (estrutura vazia)")
+    else:
+        print("Não passou no caso 3 (estrutura vazia)")
 
 def teste_exibe_jogo():
-    print("exibe_jogo")
-    #TAD correto
-    estrutura_valida={"nome1":10,"nome2":20,"nome3":30}
-    #TAD incorreto
-    estrutura_invalida={}
-    #nome valido
-    nome_valido="Detetive"
-    #nome invalido
-    nome_invalido=3
-    #nome de jogo removido
-    nome_removido="Jogo da Vida"
-    #nome de jogo inexistente
-    nome_inexistente="WAR"
+    print("exibe_jogo()")
+    # TAD correto
+    estrutura_valida = {"nome1":10, "nome2":20, "nome3":30}
+    # TAD incorreto 
+    estrutura_invalida = {}
+    # nome valido
+    nome_valido = "nome1"
+    # nome invalido
+    nome_invalido = 3
+    # nome de jogo removido
+    nome_removido = "Jogo da Vida"
+    # nome de jogo inexistente
+    nome_inexistente = "WAR"
 
-    #testando exibição com nome invalido
-    resultado=exibe_jogo(nome_invalido,estrutura_valida)
-    if resultado == -2:
+    # testando exibição com nome invalido
+    execution_result = exibe_jogo(nome_invalido,estrutura_valida)
+    if execution_result == -11:
         print("Passou no caso 1 (nome invalido)")
     else:
         print("Não passou no caso 1 (nome invalido)")
-        return 1
     
-    #testando exibição com estrutura vazia
-    resultado=exibe_jogo(nome_valido,estrutura_invalida)
+    # testando exibição com estrutura vazia
+    execution_result = exibe_jogo(nome_valido, estrutura_invalida)
 
-    if resultado == -1:
+    if execution_result == -9:
         print("Passou no caso 2 (estrutura vazia)")   
     else:
         print("Não passou no caso 2 (estrutura vazia)")
         return 1
     
-    #testando exibição com jogo presente
-    resultado=exibe_jogo(nome_valido,estrutura_valida)
+    # testando exibição com jogo presente
+    execution_result = exibe_jogo(nome_valido, estrutura_valida)
     
-    if resultado==0:
+    if execution_result == 1:
         print("Passou no caso 3 (jogo presente)")  
     else:
         print("Não passou no caso 3 (jogo presente)") 
-        return 1
 
-    #testando exibição com jogo não presente
-    resultado=remove_jogo(nome_removido,estrutura_valida)
+    # testando exibição com jogo não presente
+    execution_result = remove_jogo(nome_removido,estrutura_valida)
     
-    if resultado==1:
-        print("Passou no caso 4 (jogo anteriormente removido)")  
+    if execution_result == 0:
+        print("Passou no caso 4 (jogo não presente)")  
     else:
-        print("Não passou no caso 4 (jogo anteriormente removido)") 
-        return 1
-
-    #testando exibição com jogo nunca existente
-    resultado=remove_jogo(nome_inexistente,estrutura_valida)
-    
-    if resultado==1:
-        print("Passou no caso 4 (jogo nunca existente)")  
-    else:
-        print("Não passou no caso 4 (jogo nunca existente)") 
-        return 1
-    return 0
+        print("Não passou no caso 4 (jogo não presente)") 
 
 def teste_gera_log():
     print("gera_log")
@@ -428,8 +439,8 @@ def main_teste():
     # teste_recebe_pedidos()
     teste_insere_jogo()
     teste_cadastrar()
-    # teste_exibe_todos()
-    # teste_exibe_jogo()
+    teste_exibe_todos()
+    teste_exibe_jogo()
     # teste_gera_log()
     print("TESTING DONE")
 

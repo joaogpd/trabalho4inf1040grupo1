@@ -74,17 +74,17 @@ def exibe_todos_estoque(estrutura):
 """
 @validaArg
 def exibe_jogo(nome, estrutura):
-    if not isinstance(nome,str):
-        return -11 #Nome inválido
+    if not isinstance(nome, str):
+        return -11 # Nome inválido
     if not isinstance(estrutura, dict):
         return -8 # Estrutura inválida
-    if estrutura=={}:
-        return -9 #Estrutura vazia
+    if not estrutura:
+        return -9 # Estrutura vazia
     if nome in estrutura:
-        print("Nome: "+nome+"\nQuantidade:",estrutura[nome])
-        return 1 #Jogo existente
+        print("Nome: " + nome + "\nQuantidade:", estrutura[nome])
+        return 1 # Jogo existente
     else:
-      return 0 #Jogo não encontrado
+        return 0 # Jogo não encontrado
     
 """
 ** Objetivo: inserir unidades de um jogo no estoque
