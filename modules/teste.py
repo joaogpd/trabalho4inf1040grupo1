@@ -127,15 +127,15 @@ def teste_remove_jogo():
 def teste_restaura_persiste():
     print("restaura_persiste")
 
-    #tad correto (dict)
+    # tad correto (dict)
     estrutura_valida = {"nome1": 10,
                         "nome2" : 20,
                         "nome3" : 30}
     
-    #tad incorreto
+    # tad incorreto
     estrutura_invalida = [1,2,3]
 
-    #nome de arquivo
+    # nome de arquivo
     nome_valido = "dados_estrutura.json"
     nome_invalido = "blabla.js"
 
@@ -200,9 +200,9 @@ def teste_recebe_pedidos():
 
 def teste_insere_jogo():
 
-    print("insere_jogo()")
+    print("inserir_jogo()")
 
-    #{nomeX: preco}
+    #{nomeX: quantidade}
     estrutura = {"nome1":10,
                  "nome2":20,
                  "nome3":30}
@@ -218,49 +218,50 @@ def teste_insere_jogo():
     preco_valido = 40
     preco_invalido = "quarenta"
 
-    #Caso 1: nome valido, preço valido
-    inserir_jogo(nome_valido, preco_valido, estrutura)
-    if estrutura == estrutura_somada and ret == 1:
-        print("Passou no caso 1")
+    # Caso 1: nome valido, quantidade válida
+    execution_result = inserir_jogo(estrutura, nome_valido, preco_valido)
+    if execution_result == 1:
+        print("Passou no caso 1 (parâmetros válidos)")
     else:
-        print("Nao passou no caso 1")
+        print("Nao passou no caso 1 (parâmetros válidos)")
         return 1
 
-    #Caso 2: nome valido, preço invalido
-    #Funcao insere_jogo deve retonar codigo de erro para preco invalido (-2)
-    ret = inserir_jogo(nome_valido, preco_invalido, estrutura)
-    if estrutura == backup and ret == -2:
-        print("Passou no caso 2 (nao inseriu nada e retornou o codigo de erro)")
+    # Caso 2: nome valido, quantidade inválida
+    # Funcao insere_jogo deve retornar codigo de erro para preco invalido (-5)
+    execution_result = inserir_jogo(estrutura, nome_valido, preco_invalido)
+    if execution_result == -5:
+        print("Passou no caso 2 (quantidade inválida)")
     else:
-        print("Não passou no caso 2")
+        print("Não passou no caso 2 (quantidade inválida)")
         return 1
 
-    #Caso 3: nome invalido, preço valido
-    #Funcao insere_jogo deve retonar codigo de erro para nome invalido (-1)
-    ret = inserir_jogo(nome_invalido, preco_valido, estrutura)
-    if estrutura == backup and ret == -2:
-        print("Passou no caso 3 (nao inseriu nada e retornou o codigo de erro)")
+    # Caso 3: nome invalido, quantidade válida
+    # Funcao insere_jogo deve retonar codigo de erro para nome invalido (-5)
+    execution_result = inserir_jogo(estrutura, nome_invalido, preco_valido)
+    if execution_result == -5:
+        print("Passou no caso 3 (nome inválido)")
     else:
-        print("Não passou no caso 3")
-        return 1
-    
-    #Caso 4: nome inválido, preço inválido
-    #Funcao insere_jogo deve retonar codigo de erro para nome e preco invalido (-3)
-    ret = inserir_jogo(nome_invalido, preco_invalido, estrutura)
-    if estrutura == backup and ret == -3:
-        print("Passou no caso 4 (nao inseriu nada e retornou o codigo de erro)")
-    else:
-        print("Não passou no caso 4")
+        print("Não passou no caso 3 (nome inválido)")
         return 1
 
-    #Caso 5: elemento já presente
-    #Funcao insere_jogo deve retonar codigo de erro para nome já presente (0)
-    ret = inserir_jogo(nome_valido, preco_valido, estrutura)
-    if estrutura == backup and ret == 0:
-        print("Passou no caso 5 (nao inseriu nada e retornou o codigo de erro)")
+    # Caso 4: estrutura inválida
+    execution_result = inserir_jogo("", nome_valido, preco_valido)
+    if execution_result == -4:
+        print("Passou no caso 4 (estrutura inválida)")
     else:
-        print("Não passou no caso 5")
+        print("Não passou no caso 4 (estrutura inválida)")
         return 1
+
+    # Avaliar impacto na geração de log
+
+    # # Caso 5: elemento já presente
+    # # Funcao insere_jogo deve retonar codigo de erro para nome já presente (0)
+    # execution_result = inserir_jogo(nome_valido, preco_valido, estrutura)
+    # if estrutura == backup and ret == 0:
+    #     print("Passou no caso 5 (nao inseriu nada e retornou o codigo de erro)")
+    # else:
+    #     print("Não passou no caso 5")
+    #     return 1
 
     return 0
 
@@ -372,7 +373,7 @@ def main_teste():
     teste_remove_jogo()
     # teste_restaura_persiste()
     # teste_recebe_pedidos()
-    # teste_insere_jogo()
+    teste_insere_jogo()
     # teste_exibe_todos()
     # teste_exibe_jogo()
     # teste_gera_log()

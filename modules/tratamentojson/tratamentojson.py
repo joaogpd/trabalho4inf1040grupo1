@@ -255,10 +255,10 @@ Em "catalogo", "nome" : "preco"
 """
 @validaArg
 def restaura_estrutura_estoque(arquivo_estrutura, estoque):
-    # if not isinstance(arquivo_estrutura, str):
-    #     return -16 # arquivo_estrutura não é string
+    if not isinstance(arquivo_estrutura, str):
+        return -16 # arquivo_estrutura não é string
     # if verificar_json(arquivo_estrutura) == 0:
-    #     # print("Arquivo da estrutura está vazio")
+    #     print("Arquivo da estrutura está vazio")
     #     return -17
     # if verificar_json(arquivo_estrutura) == -1:
     #     # print("Arquivo da estrutura tem formato invalido")

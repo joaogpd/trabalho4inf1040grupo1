@@ -107,21 +107,16 @@ def exibe_jogo(nome, estrutura):
 """
 @validaArg
 def inserir_jogo(estrutura, nome, quantidade=10):
-    
-    #Tratando casos de parametros invalidos
-    
+    # Tratando casos de parametros invalidos
     if not isinstance(estrutura, dict):
-        print("Erro, a estrutura passada não é dict")
+        # print("Erro, a estrutura passada não é dict")
         return -4
     if not isinstance(quantidade, int):
-        print("Erro, a quantidade passada não é inteira")
+        # print("Erro, a quantidade passada não é inteira")
         return -5
     if not isinstance(nome, str):
-        print("Erro, o nome não é uma string")
+        # print("Erro, o nome não é uma string")
         return -5
-    
-    # tratando casos de parametros invalidos
-
     estrutura[nome] = quantidade
     return 1
 
