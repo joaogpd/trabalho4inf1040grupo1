@@ -135,21 +135,15 @@ def exibe_todos_catalogo(estrutura):
 """
 @validaArg
 def cadastrar(estrutura, nome, preco):
-    
     # Tratando casos de parametros invalidos
-    
     if not isinstance(estrutura, dict):
-        print("Erro, a estrutura passada não é dict")
+        # print("Erro, a estrutura passada não é dict")
         return -4
     if not (isinstance(preco, int) or isinstance(preco, float)):
-        print("Erro, o preco passado não é inteiro nem float")
+        # print("Erro, o preco passado não é inteiro nem float")
         return -5
     if not isinstance(nome, str):
-        print("Erro, o nome não é uma string")
+        # print("Erro, o nome não é uma string")
         return -5
-    
-    # tratando casos de parametros invalidos
-    
-
     estrutura[nome] = preco
     return 1

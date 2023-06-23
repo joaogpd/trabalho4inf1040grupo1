@@ -258,6 +258,66 @@ def teste_insere_jogo():
     # else:
     #     print("Não passou no caso 5")
 
+def teste_cadastrar():
+
+    print("cadastrar()")
+
+    #{nomeX: preco}
+    estrutura = {"nome1":10,
+                 "nome2":20,
+                 "nome3":30}
+    
+    estrutura_somada = {"nome1":10,
+                 "nome2":20,
+                 "nome3":30,
+                 "nome4":40}
+    backup = estrutura
+
+    nome_valido = "nome4"
+    nome_invalido = 1990
+    preco_valido = 40
+    preco_invalido = "quarenta"
+
+    # Caso 1: nome valido, preco válido
+    execution_result = cadastrar(estrutura, nome_valido, preco_valido)
+    if execution_result == 1:
+        print("Passou no caso 1 (parâmetros válidos)")
+    else:
+        print("Nao passou no caso 1 (parâmetros válidos)")
+
+    # Caso 2: nome valido, preco inválido
+    # Funcao cadastrar deve retornar codigo de erro para preco invalido (-5)
+    execution_result = cadastrar(estrutura, nome_valido, preco_invalido)
+    if execution_result == -5:
+        print("Passou no caso 2 (preço inválido)")
+    else:
+        print("Não passou no caso 2 (preço inválido)")
+
+    # Caso 3: nome invalido, preco válido
+    # Funcao insere_jogo deve retonar codigo de erro para nome invalido (-5)
+    execution_result = cadastrar(estrutura, nome_invalido, preco_valido)
+    if execution_result == -5:
+        print("Passou no caso 3 (nome inválido)")
+    else:
+        print("Não passou no caso 3 (nome inválido)")
+
+    # Caso 4: estrutura inválida
+    execution_result = cadastrar("", nome_valido, preco_valido)
+    if execution_result == -4:
+        print("Passou no caso 4 (estrutura inválida)")
+    else:
+        print("Não passou no caso 4 (estrutura inválida)")
+
+    # Avaliar impacto na geração de log
+
+    # # Caso 5: elemento já presente
+    # # Funcao insere_jogo deve retonar codigo de erro para nome já presente (0)
+    # execution_result = inserir_jogo(nome_valido, preco_valido, estrutura)
+    # if estrutura == backup and ret == 0:
+    #     print("Passou no caso 5 (nao inseriu nada e retornou o codigo de erro)")
+    # else:
+    #     print("Não passou no caso 5")
+
 def teste_exibe_todos():
     print("exibe_todos")
 
@@ -367,6 +427,7 @@ def main_teste():
     # teste_restaura_persiste()
     # teste_recebe_pedidos()
     teste_insere_jogo()
+    teste_cadastrar()
     # teste_exibe_todos()
     # teste_exibe_jogo()
     # teste_gera_log()
