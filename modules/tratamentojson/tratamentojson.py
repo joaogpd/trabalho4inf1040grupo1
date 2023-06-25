@@ -16,10 +16,9 @@ def validaArg(func):
 ** Descrição detalhada:
 - Valida o json recebido
 - Adiciona  o jogo em questão ao catálogo e ao estoque
-- 
 ** Acoplamento
 * Parâmetro:
-- solicitacao -> nome do arquivo json:
+- solicitacao -> str: nome do arquivo json
 - estoque -> dict: estrutura que deve ter nome e quantidade de cada jogo
 - catalogo -> dict: estrutura que deve ter nome e valor de cada jogo
 * Retornos:
@@ -103,9 +102,9 @@ def tratar_pedidos_novojogo(solicitacao,estoque,catalogo):
 ** Condições de acoplamento:
 * Assertivas de entrada:
 - A função recebe 2 parâmetros
-- Precisa das funcoew auxiliares, verificar_json, aumentar_quantidade e diminuir_quantidade
+- Precisa das funcoes auxiliares, verificar_json, aumentar_quantidade e diminuir_quantidade
 * Assertivas de saída:
-- Realiza as operacoes (compra/venda) necessaria e retorna o codigo correspondente
+- Realiza as operacoes (compra/venda) necessarias e retorna o codigo correspondente
 - Arquivo de solicitacao JSON será descartado, entao nao é preciso fazer nada com ele
 """
 
@@ -427,6 +426,20 @@ def persiste_estrutura(estoque, catalogo):
     print("Sucesso ao persistir os dados") #.json montado corretamente
     return 1
 
+
+"""
+** Objetivo: gerar um log da execução
+** Descrição detalhada
+- Verifica a validade do parâmetro
+- Abre o arquivo do log
+- Passa o conteúdo dicionário para o arquivo
+** Acoplamento:
+* Parâmetro:
+- dict_log -> dict: dicionário com os logs
+* Retornos:
+- -4: caso de 'dict_log' não ser dict
+- 1: caso de sucesso
+"""
 @validaArg
 def gera_log(dict_log):
     if not isinstance(dict_log,dict):
@@ -436,5 +449,5 @@ def gera_log(dict_log):
     dict_log_json = json.dumps(dict_log)
     f.write(dict_log_json)
     f.close()
-    return 0
+    return 1
 

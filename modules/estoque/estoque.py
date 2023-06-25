@@ -10,6 +10,26 @@ def validaArg(func):
         return func(*args, **kwargs)
     return wrapper
 
+"""
+** Objetivo: remover um jogo da estrutura estoque
+** Descrição detalhada:
+- Valida o tipo do parâmetro recebido
+- Confere se o valor está na estrutura
+- Remove esse valor da estrutura
+** Acoplamento
+* Parâmetro:
+- nome -> str: nome do jogo a ser removido
+- estrutura -> dict: estrutura de estoque
+* Retornos:
+- -1: caso de 'nome' não ser str
+- 0: caso de jogo não encontrado
+- 1: caso de sucesso
+** Condições de acoplamento:
+* Assertivas de entrada:
+- A função recebe dois parâmetros
+* Assertivas de saída:
+- O valor passado é removido da estrutura
+"""
 @validaArg
 def remove_jogo(nome, estrutura):
     if not isinstance(nome, str):
@@ -170,9 +190,9 @@ def diminuir_quantidade(estrutura, nome, quantidade):
 - estrutura -> dict: estrutura que deve ter conteúdo impresso em totalidade
 - nome -> string: nome do jogo que deve ter a quantidade atualizada
 * Retornos:
-- msgerro1: caso de 'estrutura' não ser dict
-- msgerro2: caso de 'quantidade' não ser int ou 'nome' não ser string
-- estrutura em caso de sucesso
+- -4: caso de 'estrutura' não ser dict
+- -5: caso de 'quantidade' não ser int ou 'nome' não ser string
+- 1: em caso de sucesso
 ** Condições de acoplamento:
 * Assertivas de entrada:
 - A função recebe 3 parâmetros

@@ -60,11 +60,11 @@ def alterar_nome(estrutura, nome, nome_novo):
 - nome -> string: nome atual que contém o valor que deve ser alterado
 - preco_novo -> int, float: preço novo para o qual a chave deve ser atualizada
 * Retornos:
-- msgerro2: caso de 'estrutura' não ser dict
-- msgerro3: caso de 'nome' não ser str
-- msgerro4: caso de 'preco_novo' não ser int ou float
-- msgerro1: caso de 'nome' não presente na 'estrutura'
-- msgsucesso: caso de sucesso
+- -13: caso de 'estrutura' não ser dict
+- -14: caso de 'nome' não ser str
+- -15: caso de 'preco_novo' não ser int ou float
+- -12: caso de 'nome' não presente na 'estrutura'
+- 1: caso de sucesso
 ** Condições de acoplamento:
 * Assertivas de entrada:
 - A função deve receber três parâmetros
@@ -124,9 +124,9 @@ def exibe_todos_catalogo(estrutura):
 * Parâmetro:
 - estrutura -> dict: estrutura que deve ter conteúdo impresso em totalidade
 * Retornos:
-- msgerro1: caso de 'estrutura' não ser dict
-- msgerro2: caso de 'preco' não ser int nem float ou 'nome' não ser string
-- estrutura em caso de sucesso
+- -4: caso de 'estrutura' não ser dict
+- -5: caso de 'preco' não ser int nem float ou 'nome' não ser string
+- 1: em caso de sucesso
 ** Condições de acoplamento:
 * Assertivas de entrada:
 - A função recebe 3 parâmetros
