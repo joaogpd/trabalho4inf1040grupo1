@@ -114,9 +114,9 @@ def exibe_jogo(nome, estrutura):
 - estrutura -> dict: estrutura que deve ter conteúdo impresso em totalidade
 - nome -> string: nome do jogo que deve ter a quantidade atualizada
 * Retornos:
-- msgerro1: caso de 'estrutura' não ser dict
-- msgerro2: caso de 'quantidade' não ser int ou 'nome' não ser string
-- estrutura em caso de sucesso
+- -4: caso de 'estrutura' não ser dict
+- -5: caso de 'quantidade' não ser int ou 'nome' não ser string
+- 1: em caso de sucesso
 ** Condições de acoplamento:
 * Assertivas de entrada:
 - A função recebe 3 parâmetros
@@ -148,9 +148,9 @@ def inserir_jogo(estrutura, nome, quantidade=10):
 - estrutura -> dict: estrutura que deve ter conteúdo impresso em totalidade
 - nome -> string: nome do jogo que deve ter a quantidade atualizada
 * Retornos:
-- msgerro1: caso de 'estrutura' não ser dict
-- msgerro2: caso de 'quantidade' não ser int ou 'nome' não ser string
-- estrutura em caso de sucesso
+- -4: caso de 'estrutura' não ser dict
+- -5: caso de 'quantidade' não ser int ou 'nome' não ser string
+- 1: em caso de sucesso
 ** Condições de acoplamento:
 * Assertivas de entrada:
 - A função recebe 3 parâmetros
