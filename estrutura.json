@@ -1,15 +1,12 @@
 {
     "estoque": {
-        "abcd": 10,
-        "joog4": 17,
-        "4": 7,
-        "adsadsa": 10
+        "nome1": 10,
+        "nome2": 20,
+        "nome3": 15
     },
     "catalogo": {
-        "jogo2": 3.0,
-        "43": 53.0,
-        "od": 6.0,
-        "bbs": 5.0,
-        "jooo": 2.0
+        "nome1": 2.0,
+        "nome2": 3.2,
+        "nome3": 5.6
     }
 }

@@ -125,65 +125,72 @@ def teste_remove_jogo():
 
 
 def teste_restaura_persiste():
-    print("restaura_persiste")
-
-    # tad correto (dict)
-    estrutura_valida_estoque = {"nome1": 10,
-                        "nome2" : 20,
-                        "nome3" : 30}
+    estrutura_valida_estoque = {"nome1" : 10, "nome2" : 20, "nome3" : 15}
+    estrutura_valida_catalogo = {"nome1" : 2.0, "nome2" : 3.2, "nome3" : 5.6}
     
-    estrutura_valida_catalogo = {
-        "nome1": 5.0,
-        "nome2": 10.0,
-        "nome3": 15.0
-    }
-    
-    # tad incorreto
-    estrutura_invalida = [1,2,3]
+    print("persiste_estrutura()")
 
-    # nome de arquivo
-    nome_valido = "estrutura.json"
-    nome_invalido = "blabla.js"
-
-    try:
-        persiste_estrutura(estrutura_valida_estoque, estrutura_valida_catalogo)
-    except:
-        print("Não passou no caso 1 (persiste)(nome valido)")
-        return 1
-
-    try:
-        persiste_estrutura(estrutura_invalida, estrutura_invalida)
-    except:
-        print("Não passou no caso 2 (persiste)(nome invalido)")
-        return 1
-        
-    estrutura_retornada_estoque = restaura_estrutura_estoque(nome_valido)
-    estrutura_retornada_catalogo = restaura_estrutura_catalogo(nome_valido)
-
-    if (estrutura_retornada_estoque == estrutura_valida_estoque) and (estrutura_retornada_catalogo == estrutura_valida_catalogo):
-        print("Passou no caso 1 (estrutura_valida, nome_valido)")
+    # Caso 1: estoque ou catalogo inválidos
+    execution_result = persiste_estrutura("", "")
+    if execution_result == -8:
+        print("Passou no caso 1 (estoque ou catalogo invalidos)")
     else:
-        print("Não passou no caso 1 (estrutura_valida, nome_valido)")
-        return 1
-    
-    try: 
-        restaura_estrutura_catalogo(nome_invalido)
-        restaura_estrutura_estoque(nome_invalido)
-    except Exception as e:
-        print(f"Não passou no caso 2 (nome_invalido) {type(e).__name__}")
-        return 1
-    else:
-        print("Passou no caso 2 (nome_invalido)")
+        print("Não passou no caso 1 (estoque ou catalogo inválidos)")
 
-    try: 
-        persiste_estrutura(estrutura_invalida)
-    except Exception as e:
-        print(f"Não passou no caso 3 (estrutura_invalida) {type(e).__name__}")
-        return 1
+    # Caso 2: sucesso
+    execution_result = persiste_estrutura(estrutura_valida_estoque, estrutura_valida_catalogo)
+    if execution_result == 1:
+        print("Passou no caso 2 (sucesso)")
     else:
-        print("Passou no caso 3 (estrutura_invalida)")
+        print("Não passou no caso 2 (sucesso)")
+
+    print("restaura_estrutura_estoque()")
+
+    estrutura_vazia = dict()
+
+    # Caso 1: arquivo vazio
+    execution_result = restaura_estrutura_estoque("vazio.json", estrutura_vazia)
+    if execution_result == -18:
+        print("Passou no caso 1 (arquivo vazio)")
+    else:
+        print("Não passou no caso 1 (arquivo vazio)")
     
-    return 0
+    # Caso 2: arquivo inválido
+    execution_result = restaura_estrutura_estoque("invalid.txt", estrutura_vazia)
+    if execution_result == -18:
+        print("Passou no caso 2 (arquivo inválido)")
+    else:
+        print("Não passou no caso 2 (arquivo inválido)")
+
+    # Caso 3: execução com sucesso
+    execution_result = restaura_estrutura_estoque("estrutura.json", estrutura_vazia)
+    if execution_result == 1:
+        print("Passou no caso 3 (execução com sucesso)")
+    else:
+        print("Não passou no caso 3 (execução com sucesso)")
+
+    print("restaura_estrutura_catalogo()")
+    
+     # Caso 1: arquivo vazio
+    execution_result = restaura_estrutura_catalogo("vazio.json", estrutura_vazia)
+    if execution_result == -18:
+        print("Passou no caso 1 (arquivo vazio)")
+    else:
+        print("Não passou no caso 1 (arquivo vazio)")
+    
+    # Caso 2: arquivo inválido
+    execution_result = restaura_estrutura_catalogo("invalid.txt", estrutura_vazia)
+    if execution_result == -18:
+        print("Passou no caso 2 (arquivo inválido)")
+    else:
+        print("Não passou no caso 2 (arquivo inválido)")
+
+    # Caso 3: execução com sucesso
+    execution_result = restaura_estrutura_catalogo("estrutura.json", estrutura_vazia)
+    if execution_result == 1:
+        print("Passou no caso 3 (execução com sucesso)")
+    else:
+        print("Não passou no caso 3 (execução com sucesso)")
 
 def teste_recebe_pedidos():
     print("recebe_pedidos()")
@@ -199,10 +206,9 @@ def teste_recebe_pedidos():
 
     #Caso 1: arquivo vazio
     try:
-        tratar_solicitacao_compra(pedido_vazio,estrutura_valida_estoque)
+        tratar_solicitacao_compra(pedido_vazio, estrutura_valida_estoque)
     except:
         print("Não passou no caso 1 (pedidio vazio)")
-        return 1
     print("Passou no caso 1 (pedido vazio)")
 
     #Caso 2: pedido invalido
@@ -210,7 +216,6 @@ def teste_recebe_pedidos():
         tratar_solicitacao_compra(pedido_invalido,estrutura_valida_estoque)
     except:
         print("Não passou no caso 2 (pedidio invalido)")
-        return 1
     print("Passou no caso 2 (pedido invalido)")
 
     #Caso 3: pedido valido
@@ -218,10 +223,7 @@ def teste_recebe_pedidos():
         tratar_solicitacao_compra(pedido_valido,estrutura_valida_estoque)
     except:
         print("Não passou no caso 3 (pedidio valido)")
-        return 1
     print("Passou no caso 3 (pedido valido)")
-
-    return 0
 
 def teste_insere_jogo():
 
@@ -273,16 +275,6 @@ def teste_insere_jogo():
     else:
         print("Não passou no caso 4 (estrutura inválida)")
 
-    # Avaliar impacto na geração de log
-
-    # # Caso 5: elemento já presente
-    # # Funcao insere_jogo deve retonar codigo de erro para nome já presente (0)
-    # execution_result = inserir_jogo(nome_valido, preco_valido, estrutura)
-    # if estrutura == backup and ret == 0:
-    #     print("Passou no caso 5 (nao inseriu nada e retornou o codigo de erro)")
-    # else:
-    #     print("Não passou no caso 5")
-
 def teste_cadastrar():
 
     print("cadastrar()")
@@ -332,16 +324,6 @@ def teste_cadastrar():
         print("Passou no caso 4 (estrutura inválida)")
     else:
         print("Não passou no caso 4 (estrutura inválida)")
-
-    # Avaliar impacto na geração de log
-
-    # # Caso 5: elemento já presente
-    # # Funcao insere_jogo deve retonar codigo de erro para nome já presente (0)
-    # execution_result = inserir_jogo(nome_valido, preco_valido, estrutura)
-    # if estrutura == backup and ret == 0:
-    #     print("Passou no caso 5 (nao inseriu nada e retornou o codigo de erro)")
-    # else:
-    #     print("Não passou no caso 5")
 
 def teste_exibe_todos():
     print("exibe_todos_catalogo()")
@@ -512,30 +494,35 @@ def teste_alterar_quantidade():
         print("Não passou no caso 5 (sucesso)")
 
 def teste_gera_log():
-    print("gera_log")
+    print("gera_log()")
 
     arg_valido = {"blabla": "bla"}
     arg_invalido = [1,2,3,4]
-    if gera_log(arg_valido) != 0:
-        print("Não passou no caso 1 (estrutura valida")
-        return 1
-    if gera_log(arg_invalido) >= 0:
-        print("Não passou no caso 2 (estrutura invalida)")
-        return 1
-    print("Passou nos casos 1 e 2")
-    return 0
+    # Caso 1: parâmetro não é dict
+    execution_result = gera_log(arg_invalido)
+    if execution_result == -4:
+        print("Passou no caso 1 (parâmetro não é dict)")
+    else:
+        print("Não passou no caso 1 (parâmetro não é dict)")
+
+    # Caso 2: sucesso
+    execution_result = gera_log(arg_valido)
+    if execution_result == 1:
+        print("Passou no caso 2 (sucesso)")
+    else:
+        print("Não passou no caso 2 (sucesso)")
 
 def main_teste():
     teste_atualizacao_preco_e_nome()
     teste_remove_jogo()
-    # teste_restaura_persiste()
+    teste_restaura_persiste()
     # teste_recebe_pedidos()
     teste_insere_jogo()
     teste_cadastrar()
     teste_exibe_todos()
     teste_exibe_jogo()
     teste_alterar_quantidade()
-    # teste_gera_log()
+    teste_gera_log()
     print("TESTING DONE")
 
 

@@ -274,22 +274,23 @@ Em "catalogo", "nome" : "preco"
 * Assertivas de saída:
 - A função retorna a estrutura restaurada do arquivo para a memória principal
 - A estrutura retornada é referente ao estoque
-* Interface com o usuário:
-- 
+** Interface com o usuário:
+- "Arquivo inválido", se arquivo é inválido
 """
 @validaArg
 def restaura_estrutura_estoque(arquivo_estrutura, estoque):
     if not isinstance(arquivo_estrutura, str):
         return -16 # arquivo_estrutura não é string
-    # if verificar_json(arquivo_estrutura) == 0:
-    #     print("Arquivo da estrutura está vazio")
-    #     return -17
-    # if verificar_json(arquivo_estrutura) == -1:
-    #     # print("Arquivo da estrutura tem formato invalido")
-    #     return -18
 
     with open(arquivo_estrutura) as f:
-        json_arquivo = json.load(f)
+        try:
+            json_arquivo = json.load(f)
+        except:
+            print("Arquivo inválido")
+            return -18
+
+        if not json_arquivo:
+            return -17
         
         arquivo_est_estoque = json_arquivo["estoque"]
     
@@ -321,22 +322,23 @@ def restaura_estrutura_estoque(arquivo_estrutura, estoque):
 * Assertivas de saída:
 - A função retorna a estrutura restaurada do arquivo para a memória principal
 - A estrutura retornada é referente ao catálogo
-* Interface com o usuário:
-- 
+** Interface com o usuário:
+- "Arquivo inválido", se arquivo é inválido
 """
 @validaArg
 def restaura_estrutura_catalogo(arquivo_estrutura, catalogo):
-    # if not isinstance(arquivo_estrutura, str):
-    #     return -16 # arquivo_estrutura não é string
-    # if verificar_json(arquivo_estrutura) == 0:
-    #     # print("Arquivo da estrutura está vazio")
-    #     return -17
-    # if verificar_json(arquivo_estrutura) == -1:
-    #     # print("Arquivo da estrutura tem formato invalido")
-    #     return -18
-    
+    if not isinstance(arquivo_estrutura, str):
+        return -16 # arquivo_estrutura não é string
+
     with open(arquivo_estrutura) as f:
-        json_arquivo = json.load(f)
+        try:
+            json_arquivo = json.load(f)
+        except:
+            print("Arquivo inválido")
+            return -18
+
+        if not json_arquivo:
+            return -17
 
         arquivo_est_catalogo = json_arquivo["catalogo"]
                      
@@ -408,6 +410,8 @@ dados =
 * Assertivas de saída:
 - Sobrescreve o .json e retorna o codigo de erro
 - Nome do .json eh conhecido, logo nao deve ser retornado
+** Interface com o usuário:
+- "Sucesso ao persistir os dados", caso de sucesso
 """
 @validaArg
 def persiste_estrutura(estoque, catalogo):
@@ -439,6 +443,8 @@ def persiste_estrutura(estoque, catalogo):
 * Retornos:
 - -4: caso de 'dict_log' não ser dict
 - 1: caso de sucesso
+** Interface com o usuário:
+- "Parametro invalido", parâmetro não é dict
 """
 @validaArg
 def gera_log(dict_log):
