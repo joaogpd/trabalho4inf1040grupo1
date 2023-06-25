@@ -3,8 +3,6 @@ import os
 
 __all__ = ["remove_jogo", "exibe_todos_estoque", "exibe_jogo", "inserir_jogo", "diminuir_quantidade", "aumentar_quantidade"]
 
-# simples = CDLL(os.path.abspath("modules/estoque/simples.so"));
-
 def validaArg(func):
     def wrapper(*args, **kwargs):
         if len(args) < 1:
