@@ -38,8 +38,8 @@ def main():
     opcoes = {"exibir_estoque" : estoque.exibe_todos_estoque, "inserir_estoque" : estoque.inserir_jogo, 
 	          "remover_estoque" : estoque.remove_jogo, "exibir_jogo_estoque" : estoque.exibe_jogo, "diminuir_quantidade_estoque" : estoque.diminuir_quantidade, 
 	          "aumentar_quantidade_estoque" : estoque.aumentar_quantidade, "alterar_nome_catalogo" : catalogo.alterar_nome, "alterar_preco_catalogo" : catalogo.alterar_preco, 
-	          "exibir_catalogo" : catalogo.exibe_todos_catalogo, "cadastrar_catalogo" : catalogo.cadastrar, "ler_pedidos_jogos_novos" : tjson.tratar_pedidos_novojogo, 
-	          "ler_pedidos_compras" : tjson.tratar_solicitacao_compra}
+	          "exibir_catalogo" : catalogo.exibe_todos_catalogo, "cadastrar_catalogo" : catalogo.cadastrar, "remover_catalogo" : catalogo.remove_jogo_catalogo,
+              "ler_pedidos_jogos_novos" : tjson.tratar_pedidos_novojogo, "ler_pedidos_compras" : tjson.tratar_solicitacao_compra}
     
     log_id = 1
     while True:
@@ -122,6 +122,11 @@ def main():
                         print(f"Status: {dict_erros[ret]}")
                     except:
                         print("Insira valor válido de preço.")
+                elif "remover" in escolha:
+                    nome = input("Nome: ")
+                    ret = func(nome, est_catalogo)
+                    dict_log[f"{escolha}_{log_id}"] = dict_erros[ret]
+                    print(f"Status: {dict_erros[ret]}")
             elif "pedidos" in escolha:
                 if "jogos_novos" in escolha:
                     nome_arquivo = input("Insira o nome do arquivo: ")
