@@ -205,25 +205,25 @@ def teste_recebe_pedidos():
     }
 
     #Caso 1: arquivo vazio
-    try:
-        tratar_solicitacao_compra(pedido_vazio, estrutura_valida_estoque)
-    except:
-        print("Não passou no caso 1 (pedidio vazio)")
-    print("Passou no caso 1 (pedido vazio)")
+    execution_result = tratar_solicitacao_compra(pedido_vazio, estrutura_valida_estoque)
+    if execution_result == -3:
+        print("Passou no caso 1 (pedido vazio)")
+    else:
+        print("Não passou no caso 1 (pedido vazio)")
 
     #Caso 2: pedido invalido
-    try:
-        tratar_solicitacao_compra(pedido_invalido,estrutura_valida_estoque)
-    except:
-        print("Não passou no caso 2 (pedidio invalido)")
-    print("Passou no caso 2 (pedido invalido)")
+    execution_result = tratar_solicitacao_compra(pedido_invalido,estrutura_valida_estoque)
+    if execution_result == -3:
+        print("Passou no caso 2 (pedido invalido)")
+    else:
+        print("Não passou no caso 2 (pedido invalido)")
 
     #Caso 3: pedido valido
-    try:
-        tratar_solicitacao_compra(pedido_valido,estrutura_valida_estoque)
-    except:
-        print("Não passou no caso 3 (pedidio valido)")
-    print("Passou no caso 3 (pedido valido)")
+    execution_result = tratar_solicitacao_compra(pedido_valido,estrutura_valida_estoque)
+    if execution_result == -7 or execution_result == 1 or execution_result == -6 or execution_result == -5:
+        print("Passou no caso 3 (pedido valido)")
+    else:
+        print("Não passou no caso 3 (pedido valido)")
 
 def teste_insere_jogo():
 
@@ -516,7 +516,7 @@ def main_teste():
     teste_atualizacao_preco_e_nome()
     teste_remove_jogo()
     teste_restaura_persiste()
-    # teste_recebe_pedidos()
+    teste_recebe_pedidos()
     teste_insere_jogo()
     teste_cadastrar()
     teste_exibe_todos()
