@@ -1,4 +1,4 @@
-__all__ = ["alterar_nome", "alterar_preco", "exibe_todos_catalogo", "cadastrar"]
+__all__ = ["alterar_nome", "alterar_preco", "exibe_todos_catalogo", "cadastrar", "remove_jogo_catalogo"]
 
 def validaArg(func):
     def wrapper(*args, **kwargs):
@@ -147,3 +147,33 @@ def cadastrar(estrutura, nome, preco):
         return -5
     estrutura[nome] = preco
     return 1
+
+
+"""
+** Objetivo: remover um jogo da estrutura catalogo
+** Descrição detalhada:
+- Valida o tipo do parâmetro recebido
+- Confere se o valor está na estrutura
+- Remove esse valor da estrutura
+** Acoplamento
+* Parâmetro:
+- nome -> str: nome do jogo a ser removido
+- estrutura -> dict: estrutura de catalogo
+* Retornos:
+- -1: caso de 'nome' não ser str
+- 0: caso de jogo não encontrado
+- 1: caso de sucesso
+** Condições de acoplamento:
+* Assertivas de entrada:
+- A função recebe dois parâmetros
+* Assertivas de saída:
+- O valor passado é removido da estrutura
+"""
+@validaArg
+def remove_jogo_catalogo(nome, estrutura):
+    if not isinstance(nome, str):
+        return -1 # Nome invalido
+    if nome in estrutura:
+        del estrutura[nome]
+        return 1 # Jogo removido com sucesso
+    return 0 # Jogo nao encontrado (já removido)

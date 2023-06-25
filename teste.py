@@ -123,6 +123,43 @@ def teste_remove_jogo():
     else:
         print("Não passou no caso 4 (nome_nao_str)")
 
+def teste_remove_jogo_catalogo():
+    print("remove_jogo_catalogo()")
+    # estrutura ficticia
+    estrutura = {"nome1": 0, "nome2": 10, "nome3": 21}
+    nome_invalido = "nome0"
+    nome_valido = "nome1"
+    estruturaAux = estrutura
+
+    # testando remoção de jogo invalido
+    execution_result = remove_jogo_catalogo(nome_invalido, estrutura)
+    if execution_result == 0:
+        print("Passou no caso 1 (nome_nao_presente)")
+    else:
+        print("Não passou no caso 1 (nome_nao_presente)")
+
+    # testando remoção de jogo valido
+    execution_result = remove_jogo_catalogo(nome_valido, estrutura)
+    if execution_result == 1:
+        print("Passou no caso 2 (nome_presente)")
+    else:
+        print("Não passou no caso 2 (nome_presente)")
+
+    # testando remoção de jogo já removido
+    estruturaAux = estrutura
+    execution_result = remove_jogo_catalogo(nome_valido, estrutura)
+    if execution_result == 0:
+        print("Passou no caso 3 (nome_ja_removido)")
+    else:
+        print("Não passou no caso 3 (nome_ja_removido)")
+
+    # caso de nome não ser str
+    execution_result = remove_jogo_catalogo(10, estrutura)
+    if execution_result == -1:
+        print("Passou no caso 4 (nome_nao_str)")
+    else:
+        print("Não passou no caso 4 (nome_nao_str)")
+
 
 def teste_restaura_persiste():
     estrutura_valida_estoque = {"nome1" : 10, "nome2" : 20, "nome3" : 15}
@@ -515,6 +552,7 @@ def teste_gera_log():
 def main_teste():
     teste_atualizacao_preco_e_nome()
     teste_remove_jogo()
+    teste_remove_jogo_catalogo()
     teste_restaura_persiste()
     teste_recebe_pedidos()
     teste_insere_jogo()
