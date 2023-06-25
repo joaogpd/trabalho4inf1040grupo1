@@ -2,7 +2,7 @@ from modules.catalogo.catalogo import *
 from modules.estoque.estoque import *
 import json
 
-__all__ = ["tratar_pedidos_novojogo", "tratar_solicitacao_compra", "restaura_estrutura_estoque", "restaura_estrutura_catalogo", "persiste_estrutura"]
+__all__ = ["tratar_pedidos_novojogo", "tratar_solicitacao_compra", "restaura_estrutura_estoque", "restaura_estrutura_catalogo", "persiste_estrutura", "gera_log"]
 
 def validaArg(func):
     def wrapper(*args, **kwargs):
@@ -71,14 +71,18 @@ def tratar_pedidos_novojogo(solicitacao,estoque,catalogo):
         if nome_jogo not in catalogo:
             print("Digite o valor do jogo "+nome_jogo+":")
             valor_jogo=input()
+            try:
+                valor_jogo = int(valor_jogo)
+            except:
+                print("Insira um valor numérico para o preço")
+                return -15
             cadastrar(catalogo,nome_jogo,valor_jogo) # Adiciona no catalogo o jogo
-            aumentar_quantidade(estoque, nome_jogo)  # Compra 10 unidades
+            inserir_jogo(estoque, nome_jogo)
             return 0
         else:
             print("Jogo já existente no catálogo")#jogo já cadastrado
             return -1
-    
-
+  
 """
 ** Objetivo: Tratar a solicitacao (arquivo json) de compra de jogos
 ** Descrição detalhada:

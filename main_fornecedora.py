@@ -41,7 +41,9 @@ def main():
 	          "exibir_catalogo" : catalogo.exibe_todos_catalogo, "cadastrar_catalogo" : catalogo.cadastrar, "ler_pedidos_jogos_novos" : tjson.tratar_pedidos_novojogo, 
 	          "ler_pedidos_compras" : tjson.tratar_solicitacao_compra}
     
+    log_id = 1
     while True:
+        ret = 1
         tjson.persiste_estrutura(est_estoque, est_catalogo)
         print("\nEscolha uma opção: ")
         for i in opcoes.keys():
@@ -61,19 +63,23 @@ def main():
                     if "jogo" in escolha:
                         nome = input("Nome: ")
                         ret = func(nome, est_estoque)
-                        dict_log[escolha] = dict_erros[ret]
+                        dict_log[f"{escolha}_{log_id}"] = dict_erros[ret]
+                        print(f"Status: {dict_erros[ret]}")
                     else:
                         print("Estoque: ")
                         ret = func(est_estoque)
-                        dict_log[escolha] = dict_erros[ret]
+                        dict_log[f"{escolha}_{log_id}"] = dict_erros[ret]
+                        print(f"Status: {dict_erros[ret]}")
                 elif "inserir" in escolha:
                     nome = input("Nome: ")
                     ret = func(est_estoque, nome)
-                    dict_log[escolha] = dict_erros[ret]
+                    dict_log[f"{escolha}_{log_id}"] = dict_erros[ret]
+                    print(f"Status: {dict_erros[ret]}")
                 elif "remover" in escolha:
                     nome = input("Nome: ")
                     ret = func(nome, est_estoque)
-                    dict_log[escolha] = dict_erros[ret]
+                    dict_log[f"{escolha}_{log_id}"] = dict_erros[ret]
+                    print(f"Status: {dict_erros[ret]}")
                 elif "quantidade" in escolha:
                     nome = input("Nome: ")
                     if "diminuir" in escolha:
@@ -84,31 +90,36 @@ def main():
                             print("Insira valor válido de quantidade.")
                     elif "aumentar" in escolha:
                         ret = func(est_estoque, nome)
-                    dict_log[escolha] = dict_erros[ret]
+                    dict_log[f"{escolha}_{log_id}"] = dict_erros[ret]
+                    print(f"Status: {dict_erros[ret]}")
             elif "catalogo" in escolha:
                 if "alterar" in escolha:
                     nome = input("Nome: ")
                     if "nome" in escolha:
                         nome_novo = input("Nome novo: ")
                         ret = func(est_catalogo, nome, nome_novo)
-                        dict_log[escolha] = dict_erros[ret]
+                        dict_log[f"{escolha}_{log_id}"] = dict_erros[ret]
+                        print(f"Status: {dict_erros[ret]}")
                     if "preco" in escolha:
                         try:
                             preco_novo = float(input("Preco novo: "))
                             ret = func(est_catalogo, nome, preco_novo)
-                            dict_log[escolha] = dict_erros[ret]
+                            dict_log[f"{escolha}_{log_id}"] = dict_erros[ret]
+                            print(f"Status: {dict_erros[ret]}")
                         except:
                             print("Insira valor válido de preço.")
                 elif "exibir" in escolha:
                     print("Catalogo: ")
                     ret = func(est_catalogo)
-                    dict_log[escolha] = dict_erros[ret]
+                    dict_log[f"{escolha}_{log_id}"] = dict_erros[ret]
+                    print(f"Status: {dict_erros[ret]}")
                 elif "cadastrar" in escolha:
                     nome = input("Nome: ")
                     try:
                         preco = float(input("Preco: "))
                         ret = func(est_catalogo, nome, preco)
-                        dict_log[escolha] = dict_erros[ret]
+                        dict_log[f"{escolha}_{log_id}"] = dict_erros[ret]
+                        print(f"Status: {dict_erros[ret]}")
                     except:
                         print("Insira valor válido de preço.")
             elif "pedidos" in escolha:
@@ -118,7 +129,7 @@ def main():
                 elif "compras" in escolha:
                     nome_arquivo = input("Insira o nome do arquivo: ")
                     func(nome_arquivo, est_estoque)
-            
+        log_id += 1
     tjson.gera_log(dict_log)
                 
         

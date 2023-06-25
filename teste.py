@@ -1,6 +1,6 @@
-from catalogo.catalogo import *
-from estoque.estoque import *
-#from tratamentojson.tratamentojson import *
+from modules.catalogo.catalogo import *
+from modules.estoque.estoque import *
+from modules.tratamentojson.tratamentojson import *
 
 def teste_atualizacao_preco_e_nome():
   dados = dict()
@@ -128,28 +128,47 @@ def teste_restaura_persiste():
     print("restaura_persiste")
 
     # tad correto (dict)
-    estrutura_valida = {"nome1": 10,
+    estrutura_valida_estoque = {"nome1": 10,
                         "nome2" : 20,
                         "nome3" : 30}
+    
+    estrutura_valida_catalogo = {
+        "nome1": 5.0,
+        "nome2": 10.0,
+        "nome3": 15.0
+    }
     
     # tad incorreto
     estrutura_invalida = [1,2,3]
 
     # nome de arquivo
-    nome_valido = "dados_estrutura.json"
+    nome_valido = "estrutura.json"
     nome_invalido = "blabla.js"
 
-    persiste_estrutura(estrutura_valida)
-    estrutura_retornada = restaura_estrutura(nome_valido)
+    try:
+        persiste_estrutura(estrutura_valida_estoque, estrutura_valida_catalogo)
+    except:
+        print("Não passou no caso 1 (persiste)(nome valido)")
+        return 1
 
-    if estrutura_retornada == estrutura_valida:
+    try:
+        persiste_estrutura(estrutura_invalida, estrutura_invalida)
+    except:
+        print("Não passou no caso 2 (persiste)(nome invalido)")
+        return 1
+        
+    estrutura_retornada_estoque = restaura_estrutura_estoque(nome_valido)
+    estrutura_retornada_catalogo = restaura_estrutura_catalogo(nome_valido)
+
+    if (estrutura_retornada_estoque == estrutura_valida_estoque) and (estrutura_retornada_catalogo == estrutura_valida_catalogo):
         print("Passou no caso 1 (estrutura_valida, nome_valido)")
     else:
         print("Não passou no caso 1 (estrutura_valida, nome_valido)")
         return 1
     
     try: 
-        restaura_estrutura(nome_invalido)
+        restaura_estrutura_catalogo(nome_invalido)
+        restaura_estrutura_estoque(nome_invalido)
     except Exception as e:
         print(f"Não passou no caso 2 (nome_invalido) {type(e).__name__}")
         return 1
@@ -169,32 +188,38 @@ def teste_restaura_persiste():
 def teste_recebe_pedidos():
     print("recebe_pedidos()")
 
-    pedido_valido = "pedido.json"
-    pedido_invalido = "pedido.py"
+    pedido_valido = "pedidoteste1.json"
+    pedido_vazio = "vazio.json"
+    pedido_invalido = "steinsgate"
+    estrutura_valida_estoque = {
+        "nome1": 10,
+        "nome2" : 20,
+        "nome3" : 30
+    }
 
     #Caso 1: arquivo vazio
-    ret = recebe_pedidos(pedido_valido)
-    if ret == 0:
-        print("Passou no caso 1 (retornou o codigo de arquivo vazio)")
-    else:
-        print("Nao passou no caso 1")
+    try:
+        tratar_solicitacao_compra(pedido_vazio,estrutura_valida_estoque)
+    except:
+        print("Não passou no caso 1 (pedidio vazio)")
         return 1
+    print("Passou no caso 1 (pedido vazio)")
 
     #Caso 2: pedido invalido
-    ret = recebe_pedidos(pedido_invalido)
-    if ret == -1:
-        print("Passou no caso 2 (retornou o codigo de arquivo invalido)")
-    else:
-        print("Nao passou no caso 2")
+    try:
+        tratar_solicitacao_compra(pedido_invalido,estrutura_valida_estoque)
+    except:
+        print("Não passou no caso 2 (pedidio invalido)")
         return 1
+    print("Passou no caso 2 (pedido invalido)")
 
     #Caso 3: pedido valido
-    ret = recebe_pedidos(pedido_valido)
-    if ret == 1:
-        print("Passou no caso 3 (retornou o codigo de arquivo valido)")
-    else:
-        print("Nao passou no caso 3")
+    try:
+        tratar_solicitacao_compra(pedido_valido,estrutura_valida_estoque)
+    except:
+        print("Não passou no caso 3 (pedidio valido)")
         return 1
+    print("Passou no caso 3 (pedido valido)")
 
     return 0
 
