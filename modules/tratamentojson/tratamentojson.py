@@ -106,6 +106,8 @@ def tratar_pedidos_novojogo(solicitacao,estoque,catalogo):
 * Assertivas de saída:
 - Realiza as operacoes (compra/venda) necessarias e retorna o codigo correspondente
 - Arquivo de solicitacao JSON será descartado, entao nao é preciso fazer nada com ele
+** Interface com o usuário:
+- Mensagens seguindo os retornos de erro
 """
 
 # Solicitacao considerada:
